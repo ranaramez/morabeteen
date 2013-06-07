@@ -1,0 +1,17 @@
+.navbar.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .nav-collapse.collapse
+      .container
+        - if user_signed_in?
+          %ul.nav.pull-right
+            %li.dropdown{id: 'user-management'}
+              %a#user-management-header.dropdown-toggle{href: '#', role: 'button', data: {toggle: 'dropdown'}}
+                = current_user.email
+                %b.caret
+              %ul.dropdown-menu{role: 'menu', :"aria-labelledby" => "user-management"}
+                %li
+                  = link_to "Settings", "#"
+                %li.divider
+                %li= link_to t('user.sign_out'), destroy_user_session_path, method: :delete
+        - else
+          = render partial: 'layouts/sign_in'

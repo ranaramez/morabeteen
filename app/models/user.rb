@@ -2,7 +2,6 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
-  include Tekeya::Entity
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -42,13 +41,14 @@ class User
   field :last_name,          type: String
   field :facebook_token
   field :gender, type: Symbol
+  field :code_name
 
   #Extensions
-  slug :first_name, :last_name, history: true
-  mount_uploader :avatar, AvatarUploader
+  slug :code_name
+  # mount_uploader :avatar, AvatarUploader
   
   # Relations
-  
+
   
   # Validations
   validates_presence_of :gender

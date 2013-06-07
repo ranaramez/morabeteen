@@ -34,4 +34,20 @@ Morabeteen::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.sendgrid.net',
+    port:                 587,
+    user_name:            'mashltd',
+    password:             'Mash@123',
+    authentication:       :plain,
+    enable_starttls_auto: true
+  }
+
+
+  # Letter opener for action_mailer while deveploing
+  config.action_mailer.delivery_method = :letter_opener
 end
