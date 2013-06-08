@@ -12,6 +12,6 @@
                 %li
                   = link_to "Settings", "#"
                 %li.divider
-                %li= link_to t('user.sign_out'), destroy_user_session_path, method: :delete
+                %li= link_to t('user.sign_out'), destroy_user_session_path
         - else
           = render partial: 'layouts/sign_in'

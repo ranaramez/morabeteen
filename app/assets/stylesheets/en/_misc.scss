@@ -409,6 +409,28 @@ header{
 
 }
 
+.social-links{
+  color: white;
+  a{
+    color: #ccc;
+    margin-left: 3px;
+
+    &.facebook:hover{
+      color: #3B5998;
+    }
+
+    &.twitter:hover{
+      color: #019AD2;
+    }
+  }
+
+  i{
+    margin: 0;
+    font-size: 250%;
+    vertical-align: bottom;
+  }
+}
+
 footer{
   padding: 5px 0;
   font-weight: 600;

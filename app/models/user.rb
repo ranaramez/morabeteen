@@ -37,10 +37,10 @@ class User
   field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   # Fields
-  field :first_name,         type: String
-  field :last_name,          type: String
-  field :facebook_token
-  field :gender, type: Symbol
+  field :first_name
+  field :last_name
+  field :facebook_uid
+  field :gender,             type: Symbol
   field :code_name
 
   #Extensions
@@ -59,6 +59,23 @@ class User
   # Methods
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def self.from_omniauth(auth)
+    find_by(facebook_uid: auth["uid"]) || create_with_omniauth(auth)
+  end
+
+  def self.create_with_omniauth(auth)
+    user = find_by(email: auth["info"]["email"]) || new
+    user.facebook_uid = auth["uid"]
+    user.first_name ||= auth["info"]["first_name"]
+    user.last_name ||= auth["info"]["last_name"]
+    user.email = auth["info"]["email"] unless user.email.present?
+    user.gender ||= auth["extra"]["raw_info"]["gender"]
+    user.password ||= Devise.friendly_token[0,20]
+    user.skip_confirmation!
+    user.save
+    user
   end
 
 end

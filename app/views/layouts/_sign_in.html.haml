@@ -4,3 +4,9 @@
     = f.password_field :password, placeholder: 'Password', class: "span2"
 
     = f.submit "Sign in", class: "btn btn-success"
+  .social-links.span3
+    Or, Sign in with
+    %span.social-icon
+    = link_to "/auth/facebook", class: "facebook" do
+      facebook
+      %i.icon-facebook-circled
