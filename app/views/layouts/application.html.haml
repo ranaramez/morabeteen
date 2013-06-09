@@ -28,7 +28,11 @@
 
   %body
     = render partial: 'layouts/header'
-    .container
-      = custom_bootstrap_flash
-    = yield
+    .contents
+      .container-fluid
+        .content
+          = custom_bootstrap_flash
+          .row-fluid
+            .span12
+              = yield
 

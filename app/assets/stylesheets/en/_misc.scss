@@ -32,6 +32,10 @@ body{
   text-shadow:none;
   position: relative;
 
+  .content{
+    margin-top: 70px;
+  }
+
   &.drawe-open{
     overflow: hidden;
   }

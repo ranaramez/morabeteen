@@ -1,7 +1,7 @@
 .navbar.navbar-inverse.navbar-fixed-top
   .navbar-inner
-    .nav-collapse.collapse
-      .container
+    .container-fluid
+      .nav-collapse.collapse
         - if user_signed_in?
           %ul.nav.pull-right
             %li.dropdown{id: 'user-management'}
