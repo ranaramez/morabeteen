@@ -11,7 +11,11 @@
               %ul.dropdown-menu{role: 'menu', :"aria-labelledby" => "user-management"}
                 %li
                   = link_to "Settings", "#"
+                - if current_user.role?(:admin)
+                  %li 
+                    = link_to "Admin dashboard", admin_dashboard_path
                 %li.divider
                 %li= link_to t('user.sign_out'), destroy_user_session_path
+
         - else
           = render partial: 'layouts/sign_in'
