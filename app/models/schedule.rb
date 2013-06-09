@@ -13,7 +13,8 @@ class Schedule
   field :zone, type: Symbol
 
   # Associations
-  embeds_many :tasks
+  has_many :tasks
+  
 
   accepts_nested_attributes_for :tasks
 
