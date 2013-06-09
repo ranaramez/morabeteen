@@ -18,6 +18,7 @@ gem 'twitter-typeahead-rails', github: 'mash-ltd/twitter-typeahead-rails'
 gem 'whenever',             :require => false
 gem 'morrisjs-rails'
 gem 'raphael-rails'
+gem 'cancan',               "~> 1.6.10"
 
 group :assets do
   gem 'hogan_assets'

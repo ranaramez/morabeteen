@@ -15,6 +15,7 @@ class User
     male: "11",
     female: "10"
   }
+  ROLES = [:admin, :default]
 
   ## Database authenticatable
   field :email,              :type => String, :default => ""
@@ -46,6 +47,7 @@ class User
   field :facebook_uid
   field :gender,             type: Symbol
   field :code_name,          type: String
+  field :role,               type: Symbol
 
   #Extensions
   slug :code_name
@@ -75,6 +77,10 @@ class User
     params = {facebook_uid: auth["uid"], first_name: auth["info"]["first_name"], last_name: auth["info"]["last_name"]}
     return user.update_attributes(params) if user.present?
     return User.create(params.merge!({email: auth["info"]["email"], password: Devise.friendly_token[0,20], gender: auth["extra"]["raw_info"]["gender"]}))
+  end
+
+  def role?(role)
+    self.role == role
   end
 
   protected
