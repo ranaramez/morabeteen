@@ -1,0 +1,10 @@
+.controls
+  = f.text_field :description, class: "span4", placeholder: t('common.task')
+  = f.text_field :points, class: "span2", placeholder: t('common.points')
+  = f.select :activity_id, options_for_select(Activity.all.map{|a| [a.title, a.id]}), class: "span2 mini"
+  = f.check_box :_destroy
+  = f.label :_destroy, "Remove Task" 
+  - if sis_zone?
+    %label.checkbox
+      = t('task.duplicate')
+      = f.check_box :common

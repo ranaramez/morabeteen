@@ -1,0 +1,28 @@
+.row-fluid
+  .span7
+    / = link_to "New schedule", new_schedule_path
+    = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
+  .span5
+    - @schedules.each do |schedule|
+      = link_to schedule_path(schedule) do
+        = schedule.title
+      = t('schedule.start_date')
+      = schedule.start_date
+      = t('schedule.end_date')
+      = schedule.end_date
+#new-schedule.modal.hide.fade{tabindex: "-1", role: "dialog"}
+  .modal-header
+    = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
+    %h3 
+      = t('schedule.new')
+  = form_tag create_multiple_schedules_path, method: :put do
+    .modal-body
+      = render partial: "schedule-form"
+    / = form_for Schedule.new do |f|
+    /   .fieldset
+    /     = f.text_field :title, placeholder: t('schedule.title')
+    /     = f.label :start_date
+    /     = f.date_select :start_date, order: [:day, :month, :year], class: "span2"
+
+    .modal-footer
+      = submit_tag "Create", class: "btn btn-success"

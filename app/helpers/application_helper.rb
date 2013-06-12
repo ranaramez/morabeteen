@@ -45,4 +45,36 @@ module ApplicationHelper
     flash_messages.join("\n").html_safe
   end
 
+  def link_to_add_fields(name, f, association)
+    new_object = f.send(association).klass.new
+    id = new_object.object_id
+    fields = fields_for(association, new_object, child_index: id) do |builder|
+      render(association.to_s.singularize + "_fields", f: builder)
+    end
+    link_to '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")} do
+      content_tag :p do
+        content_tag(:i, '', class: 'icon-plus') + 
+        name
+      end
+    end
+  end
+
+  def link_to_add_schedule(name, f, obj)
+    new_object = Schedule.new
+    id = new_object.object_id
+    fields = fields_for("schedules[#{id}]", new_object) do |builder|
+      render(partial: 'schedules/schedule-details', locals: {f: builder})
+    end
+    link_to '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")} do
+      content_tag :p do
+        content_tag(:i, '', class: 'icon-plus') + 
+        name
+      end
+    end
+  end
+
+  def sis_zone?
+    @zone == :female
+  end
+
 end

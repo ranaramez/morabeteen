@@ -1,0 +1,23 @@
+#new-schedule
+  %h3 
+    = t('schedule.fill')
+    = form_tag update_multiple_schedules_path, method: :put do
+      .row-fluid
+        .fieldset.inline
+          = label_tag :start_date
+          = select_date @schedules.first.start_date, order: [:day, :month, :year], class: "span2", prefix: "start_date"
+          = label_tag :end_date
+          = select_date @schedules.first.end_date, order: [:day, :month, :year], class: "span2", prefix: "end_date"
+      .row-fluid
+        - @schedules.each do |schedule|
+          .span6.tasks-builder
+            = fields_for "schedules[#{schedule.id}]", schedule do |s|
+              = s.text_field :title, placeholder: t('common.title'), class: "span6"
+              = s.fields_for :tasks do |t|
+                = render partial: "task_fields", locals: {f: t}
+            .add-task
+              = link_to_add_fields "Add Task", schedule, :tasks 
+                
+
+      .row-fluid
+        = submit_tag "Save", class: "btn btn-success"

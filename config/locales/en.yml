@@ -2,4 +2,558 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  # Defaults
+  date:
+    formats:
+      birthdate: '%-d-%-m-%Y'
+      fdotin_month_name: "%B"
+      fdotin_year: "%Y"
+      fdotin_day_name: "%A"
+      fdotin_day_number: "%e"
+      fdotin_hour_minute: "%l:%M%p"
+      today: 'Today'
+      tomorrow: 'Tomorrow'
+  time:
+    formats:
+      short: '%b %-d, %Y'
+      long: '%B %-d, %Y / %I:%M %p'
+      fdotin_month_name: "%B"
+      fdotin_year: "%Y"
+      fdotin_day_name: "%A"
+      fdotin_day_number: "%e"
+      fdotin_hour_minute: "%l:%M%p"
+
+  facebook_distance_of_time_in_words:
+    yesterday: "Yesterday at %{hour}"
+    day: "%{day}"
+    hours_ago: "%{hour} hour(s) ago"
+    minutes_ago: "%{minutes} minute(s) ago"
+    just_now: "Just now"
+    today_at_time: "at %{hour}"
+    month_date: "%{month} %{day}"
+    month_year: "%{month} %{day}, %{year}"
+
+  facebook_future_distance_of_time_in_words:
+    tomorrow: "Tomorrow at %{hour}"
+    day: "next %{day}"
+    in_hours: "in %{hour} hour(s)"
+    in_minutes: "in %{minutes} minute(s)"
+    less_than_a_minute: "in less than a minute"
+    today_at_time: "at %{hour}"
+    month_date: "on %{month} %{day}"
+    month_year: "on %{month} %{day}, %{year}"
+
+  mongoid: &orm
+    models:
+      admin: Admin
+      comment: Comment
+      schedule: Schedule
+      company: Company
+      document: Document
+      event: Event
+      feedback: Feedback
+      fund: Fund
+      image: Image
+      link: Link
+      membership: Membership
+      message: Message
+      post: Post
+      recommendation: Recommendation
+      resource: Resource
+      share: Share
+      user: User
+      video: Video
+
+    attributes:
+      company:
+        avatar: Avatar
+        bio: Bio
+        dismissed_notification: Dismissed notification
+        email: Email
+        industry: Industry
+        location: Location
+        mission: Mission
+        name: 'Company Name'
+        name_rejection_reason: Name rejection reason
+        need_tokens: 'Needs'
+        new_name: New name
+        number_of_employees: Number of employees
+        phone_number: Phone number
+        points: Points
+        supply_tokens: 'Supplies'
+        unread_messages_count: Unread messages count
+        vision: Vision
+        website: Website
+      task:
+        duplicate: "Add to other schedule"
+      schedule:
+        title: Title
+      video_category:
+        name: Name
+      fund:
+        title: Title
+        description: Description
+        requirements: Requirements
+        image: Image
+        application_form_id: Application form
+        event_id: Event
+      user:
+        points: Points
+        unread_messages_count: Unread messages count
+        email: Email
+        first_name: First name
+        last_name: Last name
+        bio: Bio
+        telephone: Telephone
+        blocked: Blocked
+        blocking_reason: Blocking reason
+        dismissed_notification: Dismissed notification
+        allow_unfollowed_taggers: Allow unfollowed taggers
+        avatar: Avatar
+      video:
+        votes: Votes
+        title: Title
+        url: Url
+        category_id: Category
+      membership:
+        current_position: Current position
+        role: Role
+        status: Status
+        rejection_reason: Rejection reason
+        current: Current
+        company_id: Company
+        user_id: User
+      message:
+        body: Body
+        read: Read
+      feedback:
+        content: Content
+        rating: Rating
+      resource:
+        name: Name
+      event:
+        title: Title
+        location: Location
+        details: Details
+        start_date: Start date
+        end_date: End date
+        start_time: Start time
+        end_time: End time
+        privacy: Privacy
+        timezone_offset: Timezone offset
+        attending_user_ids: Attending users
+        attending_company_ids: Attending companies
+        maybe_attending_user_ids: Maybe attending users
+        maybe_attending_company_ids: Maybe attending companies
+        declined_user_ids: Declined users
+        declined_company_ids: Declined companies
+        no_reply_user_ids: No reply users
+        no_reply_company_ids: No reply companies
+        avatar: Avatar
+      q_and_a:
+        question:
+          votes: Votes
+          title: Title
+          content: Content
+          up_votes: Up votes
+          image: Image
+          document: Document
+          tag_ids: Tags
+        answer:
+          votes: Votes
+          content: Content
+          date: Date
+          correct: Correct
+          question_id: Question
+        comment:
+          content: Content
+          date: Date
+          creator_id: Creator
+          answer_id: Answer
+        tag:
+          name: Name
+          question_ids: Questions
+
+      app_store:
+        oauth_token:
+          scope: Scope
+          app_id: App
+        app_category:
+          photo: Photo
+          name: Name
+        app:
+          rating: Rating
+          name: Name
+          description: Description
+          url: Url
+          redirect_uri: Redirect uri
+          installation_count: Installation count
+          blocking_reason: Blocking reason
+          youtube_url: YouTube url
+          logo: Logo
+          developer_id: Developer
+          category_id: Category
+          core_app: Core app
+
+  activerecord:
+    <<: *orm
+
+  notifications:
+    app_store:
+      oauth:
+        cannot_revoke_core_app: "You can't revoke a core app"
+    common:
+      assure_company: 'You Must be logged in with a company to do that'
+      not_company_admin: 'You have no access to this company'
+      complete_profile: 'Please complete your profile information by visiting %{edit_link}.'
+      link: 'edit profile'
+    companies:
+      invitations:
+        invited: 'Successfully invited %{count} users'
+      profile_updated: 'Profile was successfully edited'
+      now_manager: 'You are now a manager of the company'
+    events:
+      invitations_sent: 'Invitations were sent successfully'
+    feedbacks:
+      created: 'Feedback was created successfully'
+      invalid_request: 'Invalid request'
+      not_allowed: 'You are not allowed to post a feedback to this item'
+      not_allowed_for_this_item: 'You are not allowed to list feedbacks of this item'
+    for_mash:
+      fills:
+        updated: 'Fill updated successfully'
+        form_submitted: 'Your form submission has been submitted successfully'
+        fund_application_submitted: 'Fund application was submitted successfully'
+      templates:
+        attaching_fund_failed: 'Failed attaching your fund to the form'
+    funds:
+      not_fund_provider: 'This entity is not a fund provider'
+      create_fund_after_application: 'Fund will be created after creating the associated application form'
+      created: 'Fund created successfully'
+      fund_updated_after_application: 'Fund is updated successfully and will be associated with this application form after creating it'
+      updated: 'Fund updated successfully'
+      deleted: 'Fund was deleted successfully'
+      deletion_failed: 'Failed deleting this fund'
+      cannot_create_funds: "You don't have access to create funds"
+      not_the_creator: 'You are not the creator of this fund'
+    memberships:
+      members_roles_updated: "Members' roles were updated successfully"
+      members_confirmed: 'Members were confirmed successfully'
+      not_allowed: 'You have no access to this membership'
+      no_access: 'You have no access to this membership'
+    messages:
+      sent: 'Message Sent!'
+      deleted: 'Message Deleted!'
+    trackers:
+      tracked: "%{name} was successfully tracked"
+      untracked: "%{name} was successfully untracked"
+      entity_unavailable: 'The entity you requested is not available'
+    users:
+      company_profile_updated: 'Congratulations, you have updated your company profile information. Enjoy using Raneen.'
+    utilities:
+      switched_entity: 'Succesfully switched to %{name}'
+      switch_error: 'You do not have access to do that'
+
+  errors:
+    message:
+      event:
+        end_time_after_start_time: 'Event cannot end before starting, please check start and end dates and times'
+        end_date_after_start_date: 'Event cannot end before starting, please check start date and end date'
+        past_event: 'You cannot create event in the past, please check start date and time'
+    messages:
+      wrong_size: "is the wrong size (should be %{file_size})"
+      size_too_small: "is too small (should be at least %{file_size})"
+      size_too_big: "is too big (should be at most %{file_size})"
+      event:
+        end_time_after_start_time: 'Event cannot end before starting, please check start and end dates and times'
+        end_date_after_start_date: 'Event cannot end before starting, please check start date and end date'
+        past_event: 'You cannot create event in the past, please check start date and time'
+      feedback_report:
+        already_reported: already reported
+      fund:
+        invalid: 'is invalid'
+      message:
+        unknown_entity_type: 'Unkown entity type'
+      user:
+        must_be_provided: 'must be provided'
+
+    events:
+      deletion_failed: 'Event can not be canceled'
+      invitations_failed: 'Cannot send invitations at the moment please try again later'
+
+  event:
+    add_more_info: Add more info
+    cancel: 'Cancel Event'
+    change_timezone: Change Timezone
+    create_event: 'Create Event'
+    ends: Ends
+    event: 'Event'
+    event_canceled: 'Event Canceled'
+    event_created: 'Event Created'
+    going: Going
+    invitations: Invitations
+    invite_companies_friends: 'Invite companies and friends'
+    maybe: Maybe
+    new_event: 'New Event'
+    no_upcoming_events_yet: No Upcoming events yet!
+    not_going: Not Going
+    ongoing_events: Ongoing events
+    public_events: Public events
+    send_invitations: 'Send Invitations'
+    starts: Starts
+    tamkeen_hq_example: ! 'ex: Tamkeen HQ'
+    technology_session_example: ! 'ex: Technology session'
+    time_questionmark: Time?
+    upcoming_events: Upcoming events
+    upload_photo: 'Upload Photo'
+
+  search:
+    search_ellipsis: Search ...
+    search_for: 'Search for %{query} ...'
+    search_results_for_query: Search results for '%{query}'
+    search_results_for: Search results for
+
+  common:
+    title: Title
+    description: Description
+    task: Task
+    points: Points
+    accept: Accept
+    actions: Actions
+    are_you_sure_questionmark: Are you sure?
+    are_you_sure_to: Are you sure to
+    by: By
+    cancel: Cancel
+    companies: Companies
+    create: 'Create'
+    current_users: Current Users
+    date_and_time:
+      years:
+        one: '%{count} year'
+        other: '%{count} years'
+      months:
+        one: '%{count} month'
+        other: '%{count} months'
+      days:
+        one: '%{count} day'
+        other: '%{count} days'
+      hours:
+        one: '%{count} hour'
+        other: '%{count} hours'
+      minutes:
+        one: '%{count} minute'
+        other: '%{count} minutes'
+      seconds:
+        one: '%{count} second'
+        other: '%{count} seconds'
+    delete: Delete
+    dismiss_notifications: Dismiss notification
+    edit: 'Edit'
+    edit_profile: Edit profile
+    enter_your_message_here: 'ِEnter your message here...'
+    enter_your_reply_here: 'ِEnter your reply here...'
+    event: Event
+    events: 'Events'
+    feedback: Feedback
+    feedbacks: Feedbacks
+    follow: Follow
+    followers: Followers
+    following: Following
+    fund_downcase: fund
+    fund_providers: Fund providers
+    installed_apps: Installed Apps
+    message: 'Message'
+    messages: 'Messages'
+    more: more..
+    more_info: More information..
+    new_message: 'New Message'
+    news_feed: News feed
+    no_activity_notifications: Don’t want activity notifications?
+    no_companies_available: No companies available right now
+    no_messages: 'No Messages!'
+    notifications: 'Notifications'
+    pending_users: Pending Users
+    post: Post
+    privacy: Privacy
+    raneen_copyright_notice: ! '&copy; Raneen %{year}'
+    raneen_rights_reserved: © Raneen 2012 -  All Rights Reserved
+    reject: Reject
+    remove: Remove
+    report: Report
+    requests: Requests
+    resources: Resources
+    save: Save
+    send: 'Send'
+    send_message: Send a message
+    settings: Settings
+    share: Share
+    share_your_thoughts: Share your thoughts
+    share_your_thoughts_ellipsis: Share your thoughts...
+    share_your_thoughts_to_everyone: Share your thoughts with us and let everyone know what you're up to
+    show_more_comments: Show more comments (%{count})
+    terms: Terms
+    this: this
+    to: 'To'
+    unfollow: Unfollow
+    upload: 'Upload'
+    users: Users
+    view: View
+    write_comment: Write a comment..
+    write_something: ! 'Write something ... '
+
+  schedule:
+    new: New Schedule
+    add_alternative: Add alternative schedule
+    fill: Fill schedule
+
+  task:
+    duplicate: "Common task"
+
+  company:
+    claim_the_throne: Claim the throne
+    contact: Contact
+    employees: Employees
+    find_consumers: (Find Consumers)
+    find_suppliers: (Find Suppliers)
+    founded_since: Since %{founded_at}
+    make_role: Make %{role}
+    required_resources: Required Resources
+    select_year: Select year
+    services_and_products: Services and Products
+    website: Website
+
+  feedback:
+    actions: Actions
+    all_feedbacks: All Feedbacks
+    feedback_title: '%{title} feedback'
+    feedbacks_title: '%{title} feedbacks'
+    new_item_feedback: New %{item_name} feedback
+
+  feedback_report:
+    reasons:
+      bad: Bad
+      worse: Even Worse
+
+  for_mash:
+    fill:
+      fill_status: Fill status
+      fills: Fills
+      fund_applications: Funds applications
+      template_entries: '%{template_name} entries'
+
+    template:
+      add_attachment: Add attachment
+      add_input: ! ' Add Input'
+      add_item: Add Item
+      application_form: Application form
+      applications: Applications
+      create_new: Create new
+      create_new_template: Create New Template
+      create_template: Create Template
+      create_template_now: Create Template Now!
+      fills: Fills
+      my_applications: Applications
+      my_applications: My Applications
+      no_templates_yet: There are no templates yet.
+      required_questionmark: Required?
+      templates: Templates
+      values_placeholder: Value 1, Value 2, Value 3, ...
+
+  fund:
+    application_form: Application Form
+    create_fund: Create Fund
+    create_new_application: Create new application
+    create_new_event: Create new event
+    create_new_fund: Create New Fund
+    funds: Funds
+    new_fund: New fund
+    no_available_funds: There are no available funds to sign up for at the moment
+    requirements: Requirements
+
+  user:
+    already_connected_with_social_media: Already connected with %{provider}
+    company_info: Company information
+    company_name: Company name
+    complete_profile: Complete profile
+    connect_your_social_media: Connect your %{provider}
+    edit_user: Edit User
+    email: Email
+    first_name: First Name
+    last_name: Last Name
+    password: Password
+    password_confirmation: Password confirmation
+    profile_information: Profile information
+    sign_in: Sign in
+    sign_out: Sign out
+    sign_up: Sign up
+
+  video:
+    categories: Categories
+    raneen_tv: Raneen TV
+    vote_up: Vote Up
+    vote_down: Vote Down
+    categories: Categories
+    no_original_content: There is no available original content at the moment
+    no_external_content: There is no available external content at the moment
+
+  q_and_a:
+    common:
+      answers: Answers
+      ask: Ask
+      ask_question: Ask Question
+      back: Back
+      comment: Comment
+      description: Description
+      destroy: Destroy
+      hidden_downcase: hidden
+      my_questions: My Questions
+      search_ellipsis: Search...
+      show: Show
+      submitting: Submitting
+      question_downcase: question
+      answer_downcase: answer
+
+    question:
+      answer_this_question: ! 'Answer this question:'
+      attach: Attach
+      attached_document: Attached Document
+      delete_answer: Delete answer
+      delete_question: Delete question
+      no_answers_yet_bang: No answers yet!
+      post_question_here_ellipsis: Post your question here...
+      questions_downcase: questions
+      similar_questions: ! 'Similar questions:'
+      similar_tags: ! 'Similar tags:'
+      submit_answer: Submit Answer
+      tags: Tags
+      top_rated_questions: Top Rated Questions
+      top_voted: Top Voted
+      tracked_users_have_no_questions_bang: Your tracked users have no Questions yet!
+      tracker_users_questions: Tracker Users Questions
+      you_have_no_questions_bang: You have no Questions yet!
+
+  tekeya:
+    notifications:
+      all_notifications: All notifications
+      time_ago: '%{time} ago'
+      verbs:
+        posted: posted
+        posted_link: posted a link
+        posted_image: posted an image
+        posted_document: posted a document
+      no_notifications: Oops, You don't have any notifications!
+      tracked_by:
+        one: '%{who} is now following you'
+        other: '%{who} are now following you'
+      commented: '%{who} commented on your %{link}'
+      commented_on_followed_activity: '%{who} commented on a %{link} that you follow'
+      recommended: '%{who} recommended your %{link}'
+      posted: '%{who} %{link} on your profile'
+      invited_to_event: '%{who} invited you to %{link}'
+      event_cancelled: '%{who} cancelled %{event}'
+      via_app: 'via %{app}'
+      question_answered: '%{who} answered your %{question}'
+      answer_commented: '%{who} commented on your %{answer}'
+      fund_application_accepted: 'Your %{fund} fund application has been accepted'
+      new_application_filled: '%{who} filled your %{fund} application'
+      joined_by: '%{who} joined %{company}'

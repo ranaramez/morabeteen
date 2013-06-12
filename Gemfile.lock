@@ -224,9 +224,9 @@ GEM
       compass (>= 0.12.1)
       sass (>= 3.2.0)
       sassy-math (>= 1.5)
-    mongoid (3.0.23)
-      activemodel (~> 3.1)
-      moped (~> 1.2)
+    mongoid (3.1.4)
+      activemodel (~> 3.2)
+      moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
     mongoid-grid_fs (1.8.0)
@@ -241,7 +241,7 @@ GEM
     moped (1.5.0)
     morrisjs-rails (0.4.3)
       railties (> 3.1, < 5)
-    multi_json (1.7.5)
+    multi_json (1.7.6)
     multipart-post (1.2.0)
     nokogiri (1.5.9)
     oauth2 (0.8.1)
@@ -403,7 +403,7 @@ DEPENDENCIES
   mini_magick (= 3.4)
   modernizr-rails
   modular-scale
-  mongoid (~> 3.0.0)
+  mongoid (~> 3.1.4)
   mongoid_slug (= 2.0.1)
   mongrel (= 1.2.0.pre2)
   morrisjs-rails

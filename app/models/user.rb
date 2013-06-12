@@ -54,6 +54,7 @@ class User
   # mount_uploader :avatar, AvatarUploader
   
   # Relations
+  has_many :achievements
   
   # Validations
   validates_presence_of :gender

@@ -1,0 +1,22 @@
+#new-schedule
+  %h3 
+    = t('schedule.new')
+    = form_tag create_multiple_schedules_path, method: :put do
+      .row-fluid
+        .fieldset.inline
+          = label_tag :start_date
+          = select_date Date.today + 1, order: [:day, :month, :year], class: "span2", prefix: "start_date"
+      .row-fluid
+        - @schedules.each do |schedule|
+          .span6.tasks-builder
+            = fields_for "schedules[#{schedule.id}]", schedule do |s|
+              = s.text_field :title, placeholder: t('common.title'), class: "span6"
+              - schedule.tasks.build
+              = s.fields_for :tasks do |t|
+                = render partial: "task_fields", locals: {f: t}
+            .add-task
+              = link_to_add_fields "Add Task", schedule, :tasks 
+                
+
+      .row-fluid
+        = submit_tag "Create", class: "btn btn-success"

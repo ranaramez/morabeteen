@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails',                '3.2.12'
-gem 'mongoid',              '~> 3.0.0'
+gem 'mongoid',              '~> 3.1.4'
 gem 'devise',               '~> 2.2.3'
 gem 'haml-rails',           '0.3.4'
 gem 'routing-filter',       '0.3.1'

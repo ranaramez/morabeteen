@@ -3,6 +3,16 @@ Morabeteen::Application.routes.draw do
   devise_for :admins, path: 'admin', path_names: { sign_in: 'sign-in', sign_out: 'sign-out' }
 
   resources :activities
+  resources :schedules do
+    collection do
+      put :create_multiple
+      put :update_multiple
+    end
+
+    member do
+      get :edit_multiple
+    end
+  end
   
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: "sessions#failure"
