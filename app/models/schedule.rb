@@ -17,7 +17,7 @@ class Schedule
   has_and_belongs_to_many :tasks, inverse_of: :schedules, dependent: :destroy
   # belongs_to :creator, class_name: 'User'
   
-  accepts_nested_attributes_for :tasks, allow_destroy: true, autobuild: true, reject_if: :all_blank
+  accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
 
   # Scopes
   scope :zone, ->(zone){ where(zone: zone)}
@@ -38,9 +38,15 @@ class Schedule
     updated
   end
 
+  def self.empty_task?(attrs)
+    attrs[:description].empty?
+  end
+
   protected
 
   def check_if_can_destroy
     return false if self.start_date < Date.today 
   end
+
+  
 end
