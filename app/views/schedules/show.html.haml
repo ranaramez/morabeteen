@@ -1,0 +1,19 @@
+%h3 
+  = @schedule.title
+= form_for @schedule, method: :put do |f|
+  .row-fluid
+    .fieldset.inline
+      = label_tag :start_date
+      = select_date @schedule.start_date, order: [:day, :month, :year], class: "span2", prefix: "start_date"
+      = label_tag :end_date
+      = select_date @schedule.end_date, order: [:day, :month, :year], class: "span2", prefix: "end_date"
+  .row-fluid
+    .span6.tasks-builder
+      = f.text_field :title, placeholder: t('common.title'), class: "span6"
+      = f.fields_for :tasks do |t|
+        = render partial: "task_fields", locals: {f: t}
+      .add-task
+        = link_to_add_fields "Add Task", f, :tasks 
+    
+  .row-fluid
+    = f.submit "Save", class: "btn btn-success"

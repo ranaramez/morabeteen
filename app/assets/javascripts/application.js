@@ -3,3 +3,4 @@
 //= require bootstrap
 //= require toastr
 //= require tasks
+//= require users

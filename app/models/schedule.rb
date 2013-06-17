@@ -22,6 +22,7 @@ class Schedule
   # Scopes
   scope :zone, ->(zone){ where(zone: zone)}
   scope :for, ->(date){ where(start_date: date)}
+  scope :within, ->(date){ where(start_date:(date.prev_month..date))}
 
   # Callbacks
   before_destroy :check_if_can_destroy

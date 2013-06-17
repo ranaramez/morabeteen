@@ -3,6 +3,9 @@ Morabeteen::Application.routes.draw do
   devise_for :admins, path: 'admin', path_names: { sign_in: 'sign-in', sign_out: 'sign-out' }
 
   resources :activities
+  resources :users, only: :show do 
+    put :update_achievement
+  end
   resources :schedules do
     collection do
       put :create_multiple

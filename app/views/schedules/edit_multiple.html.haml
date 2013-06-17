@@ -16,8 +16,8 @@
               - schedule.tasks.build
               = s.fields_for :tasks do |t|
                 = render partial: "task_fields", locals: {f: t}
-            .add-task
-              = link_to_add_fields "Add Task", schedule, :tasks 
+              .add-task
+                = link_to_add_fields "Add Task", s, :tasks 
                 
 
       .row-fluid

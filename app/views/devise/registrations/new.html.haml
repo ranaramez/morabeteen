@@ -8,9 +8,9 @@ Sign up
       .span5.centered
         .field
           = f.label :male
-          = f.radio_button :gender, "Male"
+          = f.radio_button :gender, :male
           = f.label :female
-          = f.radio_button :gender, "Female"
+          = f.radio_button :gender, :female
         .field
           = f.email_field :email, class: 'input', type: 'email', placeholder: 'Email'
         .field

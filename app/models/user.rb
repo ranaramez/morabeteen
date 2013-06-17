@@ -11,6 +11,7 @@ class User
 
   # Constants
   GENDERS = [:male, :female]
+
   GENDER_PREFIX_CODE = {
     male: "11",
     female: "10"
@@ -84,11 +85,15 @@ class User
     self.role == role
   end
 
+  def schedules(date)
+    Schedule.zone(self.gender.downcase).within(date)
+  end
+
   protected
 
   def generate_code
     gender_count = User.where(gender: self.gender).count + 1
-    self.code_name = GENDER_PREFIX_CODE[self.gender] + gender_count.to_s
+    self.code_name = GENDER_PREFIX_CODE[self.gender.downcase] + gender_count.to_s
   end
 
   def skip_confirmation_mail

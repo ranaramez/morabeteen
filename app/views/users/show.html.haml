@@ -1,0 +1,31 @@
+.container
+  .row
+    .span12
+      .profile-header.clearfix
+        / .user-avatar.three.columns
+        /   = image_tag @user.avatar.profile.url
+        .user-info.span9
+          .info.span6
+            .user-name
+              = @user.name
+          .action-info.six.columns
+            .span3.count
+              .numbers
+                7
+              %label
+                Awards
+
+      %section.profile-content
+        - if @schedules.present?
+          - (@schedules.first.start_date.to_date..Date.today).each do |date|
+            = date
+            .form
+              = form_for Achievement.new, url: user_update_achievement_path(current_user.id), method: :put do |f|
+                = f.hidden_field :date, value: date
+                - current_schedules = get_schedule(date,@schedules)
+                = f.select :schedule_id, schedules_select(current_schedules, f), {}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule"}
+                - first_schedule = current_schedules.first
+                .schedule-form{id: "#{date.strftime('%y%m%d')}"}
+                  = render partial: 'users/schedule', locals: {schedule: first_schedule}
+        - else
+          No schedule yet!

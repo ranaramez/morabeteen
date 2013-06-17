@@ -10,6 +10,8 @@
                 %b.caret
               %ul.dropdown-menu{role: 'menu', :"aria-labelledby" => "user-management"}
                 %li
+                  = link_to t('common.my_schedule'), user_path(current_user.id)
+                %li
                   = link_to "Settings", "#"
                 - if current_user.role?(:admin)
                   %li 

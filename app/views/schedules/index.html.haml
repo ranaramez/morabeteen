@@ -1,15 +1,25 @@
-.row-fluid
-  .span7
-    / = link_to "New schedule", new_schedule_path
-    = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
-  .span5
-    - @schedules.each do |schedule|
-      = link_to schedule_path(schedule) do
-        = schedule.title
-      = t('schedule.start_date')
-      = schedule.start_date
-      = t('schedule.end_date')
-      = schedule.end_date
+.row-fluid.span12
+  = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
+  .span10
+    %table.table.table-striped
+      %thead
+        %tr
+          %th Title
+          %th Start date
+          %th End date
+          %th
+      %tbody
+        - @schedules.each do |schedule|
+          %tr
+            %td
+              = link_to schedule_path(schedule) do
+                = schedule.title
+            %td
+              = schedule.start_date
+            %td
+              = schedule.end_date
+            %th 
+              = link_to t("common.show"), schedule_path(schedule)
 #new-schedule.modal.hide.fade{tabindex: "-1", role: "dialog"}
   .modal-header
     = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
