@@ -1,0 +1,17 @@
+- option_selected_schedule = selected_schedule || {}
+.day-score{id: "#{date.strftime('%y%m%d')}-day-score"}
+  = render partial: 'users/day_score', locals: {date: date}
+
+= form_for @achievement || Achievement.new, url: user_update_achievement_path(current_user.id), method: :put, remote: true, format: :js, class: "achievement-form" do |f|
+  
+  = f.hidden_field :date, value: date
+  
+  = f.hidden_field :unchecked_task, class: "achievement-unchecked-task"
+  
+  = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks[date]), {selected: option_selected_schedule}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule"}
+  
+  - first_schedule = get_selected(schedules, selected_schedule)
+  .schedule-form{id: "#{date.strftime('%y%m%d')}"}
+    = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks[date] || []}
+  / = f.submit 'Update', class: "btn btn-success"
+%br

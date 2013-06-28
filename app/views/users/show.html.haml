@@ -10,22 +10,37 @@
               = @user.name
           .action-info.six.columns
             .span3.count
-              .numbers
-                7
+              .numbers{id: "#{@user.id}-acc-score"}
+                = total_acc_score
               %label
-                Awards
+                Points
 
       %section.profile-content
         - if @schedules.present?
-          - (@schedules.first.start_date.to_date..Date.today).each do |date|
-            = date
-            .form
-              = form_for Achievement.new, url: user_update_achievement_path(current_user.id), method: :put do |f|
-                = f.hidden_field :date, value: date
-                - current_schedules = get_schedule(date,@schedules)
-                = f.select :schedule_id, schedules_select(current_schedules, f), {}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule"}
-                - first_schedule = current_schedules.first
-                .schedule-form{id: "#{date.strftime('%y%m%d')}"}
-                  = render partial: 'users/schedule', locals: {schedule: first_schedule}
+          - grouped_schedules = @schedules.desc(:start_date).group_by(&:start_date)
+          - grouped_schedules.keys.each_with_index do |s,x|
+            - start_range = x == 0 ? (grouped_schedules[s].first.end_date < Date.today  ? grouped_schedules[s].first.end_date : Date.today) : grouped_schedules.keys[x-1] - 1
+            .week-points
+              .numbers{id: "#{start_range.strftime('%y%m%d')}-week-score"}
+                Week score
+                = total_week_score(s, start_range)
+              %label
+                Points
+            - (start_range.downto(s)).each do |date|
+              %h4= date
+              .form{id: "#{date.strftime('%y%m%d')}-form"}
+                = render partial: 'users/schedule-form', locals: {date: date, schedules: grouped_schedules[s], selected_schedule: nil, completed_tasks: @completed_tasks}
+              / - grouped_schedules[s].each do |schedule|
+              / = render partial: 'users/schedule', locals: {schedule: grouped_schedules[s].first}
+          / - (@schedules.first.start_date.to_date..Date.today).to_a.reverse.each do |date|
+          /   = date
+          /   .form
+          /     = form_for Achievement.new, url: user_update_achievement_path(current_user.id), method: :put do |f|
+          /       = f.hidden_field :date, value: date
+          /       - current_schedules = get_schedule(date, @schedules)
+          /       = f.select :schedule_id, schedules_select(current_schedules, f), {}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule"}
+          /       - first_schedule = current_schedules.first
+          /       .schedule-form{id: "#{date.strftime('%y%m%d')}"}
+          /         = render partial: 'users/schedule', locals: {schedule: first_schedule}
         - else
-          No schedule yet!
+          No schedules yet!

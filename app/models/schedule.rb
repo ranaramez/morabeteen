@@ -15,14 +15,16 @@ class Schedule
 
   # Associations
   has_and_belongs_to_many :tasks, inverse_of: :schedules, dependent: :destroy
-  # belongs_to :creator, class_name: 'User'
+  belongs_to :level, dependent: :destroy
   
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
 
   # Scopes
   scope :zone, ->(zone){ where(zone: zone)}
   scope :for, ->(date){ where(start_date: date)}
+  scope :for_range, ->(date){where(:start_date.lte => date, :end_date.gte => date)}
   scope :within, ->(date){ where(start_date:(date.prev_month..date))}
+  scope :with_start_and_end, ->(start, end_date){where(start_date: start, end_date: end_date)}
 
   # Callbacks
   before_destroy :check_if_can_destroy

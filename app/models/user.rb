@@ -89,6 +89,29 @@ class User
     Schedule.zone(self.gender.downcase).within(date)
   end
 
+  def completed?(task, date)
+    self.achievements.where(date: date).first.try(:completed_tasks).try(:include?, task)
+  end
+
+  def completed_task_ids
+    self.achievements.map(&:completed_task_ids).flatten
+  end
+
+  def completed_tasks_by_day(achievements=nil)
+    results = Hash.new
+    achievements = achievements || self.achievements
+    achievements.each { |a| results[a.date] = a.completed_tasks}
+    results
+  end
+
+  def total_points(achievements, start_range=nil, end_range=nil)
+    score = unless start_range
+              achievements
+            else
+              achievements.for_range(start_range, end_range)
+            end.map{|a| a.completed_tasks.map(&:points)}.flatten.inject(0, :+)
+  end
+
   protected
 
   def generate_code

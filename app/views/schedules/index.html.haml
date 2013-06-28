@@ -1,25 +1,82 @@
 .row-fluid.span12
   = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
-  .span10
-    %table.table.table-striped
-      %thead
-        %tr
-          %th Title
-          %th Start date
-          %th End date
-          %th
-      %tbody
-        - @schedules.each do |schedule|
-          %tr
-            %td
-              = link_to schedule_path(schedule) do
-                = schedule.title
-            %td
-              = schedule.start_date
-            %td
-              = schedule.end_date
-            %th 
-              = link_to t("common.show"), schedule_path(schedule)
+  - if @schedules.present?
+    .span10
+      - grouped_schedules = @schedules.group_by(&:start_date)
+      - grouped_schedules.keys.each do |s|
+        %table.table
+          %thead
+            %tr
+              %th Start date
+              %th End Date
+              %th
+          %tbody
+            %tr.success
+              %td= s.strftime('%d-%m-%Y')
+              %td= grouped_schedules[s].first.end_date.strftime('%d-%m-%Y')
+              %td
+                - if can_edit_schedule?(grouped_schedules[s].first)
+                  = link_to "Edit Date", edit_multiple_schedule_path(grouped_schedules[s].first), data: {toggle: "modal", remote: true, target: "#edit-schedule-date"}
+        - levels = grouped_schedules[s].group_by(&:level)
+        - levels.keys.each do |level|
+          %table.table.table-striped
+            %thead
+              %tr
+                %th Title
+                %th Created at
+                %th Total Tasks
+                %th Total points
+                %th
+            %tbody
+              %tr.info
+                %td{colspan: 2}
+                  = level.name
+              - levels[level].each do |schedule|
+                %tr
+                  %td
+                    = link_to schedule_path(schedule) do
+                      = schedule.title
+                  %td
+                    = schedule.created_at.to_date
+                  %td
+                    = schedule.tasks.count
+                  %td
+                    = total_schedule_points(schedule)
+                  %th 
+                    = link_to t("common.show"), schedule_path(schedule)
+            / - grouped_schedules[s].each do |schedule|
+            /   %tr
+            /     %td
+            /       = link_to schedule_path(schedule) do
+            /         = schedule.title
+            /     %td
+            /       = schedule.created_at.to_date
+            /     %td
+            /       = schedule.tasks.count
+            /     %td
+            /       = total_schedule_points(schedule)
+            /     %th 
+            /       = link_to t("common.show"), schedule_path(schedule)
+          / - @schedules.each do |schedule|
+          /   %tr
+          /     %td
+          /       = link_to schedule_path(schedule) do
+          /         = schedule.title
+          /     %td
+          /       = schedule.start_date
+          /     %td
+          /       = schedule.end_date
+          /     %td
+          /       = schedule.created_at.to_date
+          /     %td
+          /       = schedule.tasks.count
+          /     %td
+          /       = total_schedule_points(schedule)
+          /     %th 
+          /       = link_to t("common.show"), schedule_path(schedule)
+    - else
+      .alert
+        No schedules yet!
 #new-schedule.modal.hide.fade{tabindex: "-1", role: "dialog"}
   .modal-header
     = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
@@ -36,3 +93,10 @@
 
     .modal-footer
       = submit_tag "Create", class: "btn btn-success"
+
+#edit-schedule-date.modal.hide.fade{tabindex: "-1", role: "dialog"}
+  .modal-header
+    = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
+    %h3 
+      = t('schedule.edit_date')
+    #date-form

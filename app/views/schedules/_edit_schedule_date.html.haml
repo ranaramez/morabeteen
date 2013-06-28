@@ -1,0 +1,13 @@
+= form_tag update_multiple_schedules_path, method: :put do
+  .modal-body
+    = hidden_field_tag :prev_start_date, @start_date
+    = hidden_field_tag :prev_end_date, @end_date
+    .fieldset
+      = label_tag :start_date
+      = select_date @start_date, order: [:day, :month, :year], class: "span2", prefix: "start_date", disabled: true
+    .fieldset
+      = label_tag :end_date
+      = select_date @end_date, order: [:day, :month, :year], class: "span2", prefix: "end_date"
+
+  .modal-footer
+    = submit_tag "Update all", class: "btn btn-success"

@@ -8,9 +8,9 @@
     = t('common.end_date')
   .controls
     = select_date Date.today + 8, order: [:day, :month, :year], prefix: "end_date"
-.row-fluid
-  - schedule = Schedule.new
-  = fields_for "schedules[#{schedule.id}]", schedule do |s|
-    = render partial: "schedule-details", locals: {f: s}
-    .add-task
-      = link_to_add_schedule t('schedule.add_alternative'), s, schedule
+- level = Level.new
+= fields_for "levels[#{level.id}]", level do |l|
+  = render partial: "level-details", locals: {f: l, level: level}
+  .add-task
+    = link_to_add_level t('level.add'), l, level
+  

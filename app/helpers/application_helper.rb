@@ -48,7 +48,6 @@ module ApplicationHelper
   def link_to_add_fields(name, f, association)
     new_object = f.object.send(association).new
     id = new_object.object_id
-    # debugger
     fields = f.fields_for(association, new_object, child_index: id) do |builder|
       render(association.to_s.singularize + "_fields", f: builder)
     end
@@ -61,10 +60,24 @@ module ApplicationHelper
   end
 
   def link_to_add_schedule(name, f, obj)
-    new_object = Schedule.new
+    new_object = f.object.send(obj).new
     id = new_object.object_id
-    fields = fields_for("schedules[#{id}]", new_object) do |builder|
+    fields = f.fields_for(obj, new_object, child_index: id) do |builder|
       render(partial: 'schedules/schedule-details', locals: {f: builder})
+    end
+    link_to '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")} do
+      content_tag :p do
+        content_tag(:i, '', class: 'icon-plus') + 
+        name
+      end
+    end
+  end
+
+  def link_to_add_level(name, f, obj)
+    new_object = Level.new
+    id = new_object.object_id
+    fields = fields_for("levels[#{id}]", new_object) do |builder|
+      render(partial: 'schedules/level-details', locals: {f: builder, level: new_object})
     end
     link_to '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")} do
       content_tag :p do

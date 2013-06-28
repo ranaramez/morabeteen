@@ -1,0 +1,12 @@
+.row-fluid.levels-builder
+  .control-group
+    .control-label.span2
+      = f.label :level_name
+    .controls
+      = f.text_field :name
+  - schedule = level.schedules.build
+  .row-fluid
+    = f.fields_for :schedules, schedule do |s|
+      = render partial: "schedule-details", locals: {f: s}
+    .add-task
+      = link_to_add_schedule t('schedule.add_alternative'), f, :schedules
