@@ -1,0 +1,73 @@
+// FLAT COLORS VARIABLES //
+
+$flat-green-color: #32ac97;
+$flat-green-dark-color: #27ae60;
+
+$flat-red-color: #ff6860;
+$flat-red-dark-color: #cc4c46;
+
+$flat-purple-color: #9b59b6;
+$flat-purple-dark-color: #8e44ad;
+
+$flat-yellow-color: #feda60;
+$flat-yellow-dark-color: #cb9f0c;
+
+$flat-gray-color: #f4f3ef;
+$flat-dark-gray-color: #6d6d6d;
+
+@import url(http://fonts.googleapis.com/earlyaccess/droidarabickufi.css);
+
+html{
+  height: 100%; margin: 0; width: 100%;
+}
+
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+body * {
+  font-family: "Droid Arabic Kufi", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body{
+  direction: rtl;
+  overflow: scroll;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.check-box, .radio-btn{
+  color: #777;
+
+  & > div{
+    float: right;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+#error_explanation{
+  padding: 8px 14px 8px 35px;
+  background-color: rgb(252, 248, 227);
+  border: 1px solid rgb(251, 238, 213);
+  text-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+
+  color: #c09853;
+  margin-bottom: 20px;
+}
+
+.slogan{
+  color: #1e7a6a;
+}
+
+.social-signin{
+  margin-top: 5px;
+  color: #FFFFFF;
+  font-weight: 600;
+
+  a{
+    color: #1e7a6a;
+  }
+}

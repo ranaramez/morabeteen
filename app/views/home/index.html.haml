@@ -1,0 +1,55 @@
+.landing-wrapper
+  .landing
+    .container-fluid
+      .row-fluid
+        .span5
+          .quote
+            %p
+              عن أسامة بن زيد رضي الله عنهما قال: قلت يا رسول الله: لم أرك تصوم من شهر من الشهور ما تصوم من شعبان؟ قال : ذاك شهر تغفل الناس فيه عنه، بين رجب ورمضان، وهو شهر ترفع فيه الأعمال إلى رب العالمين، وأحب أن يرفع عملي وأنا صائم.
+            %p
+              [رواه النسائي]
+
+  .stat-progress
+    .container-fluid
+      .row-fluid
+        .span12
+          .progress.progress-striped.active
+            .bar{style: "width: 33.333333333%;"}
+
+  .container-fluid
+    .row-fluid
+      .span4.offset1
+        .landing-signup
+          %h3
+            التسجيل
+          %br
+
+          %form
+            .control-group
+              .controls
+                %input{type: 'text', class: 'input-xlarge', placeholder: 'البريد الإلكتروني'}
+
+            .control-group
+              .controls
+                %input{type: 'password', class: 'input-xlarge', placeholder: 'كلمة المرور'}
+
+            .control-group
+              .controls
+                %input{type: 'password', class: 'input-xlarge', placeholder: 'تأكيد كلمة المرور'}
+
+            .control-group
+              .controls
+                .radio-btn
+                  %input{type: 'radio'}
+                  ذكر
+                .radio-btn
+                  %input{type: 'radio'}
+                  أنثي
+
+            .control-group
+              .controls
+                %input{type: 'submit', value: 'تسجيل', class: 'btn btn-success'}
+
+      .span7
+        .video
+          %iframe{src: "http://player.vimeo.com/video/17120260", width:"100%", height:"400", frameborder: "0", webkitAllowFullScreen: 'true', mozallowfullscreen: 'true', allowFullScreen: 'true'}

@@ -116,7 +116,7 @@ textarea {
 
 .radio,
 .checkbox {
-  padding-left: 0;
+  padding-right: 0;
 }
 
 .btn i{
@@ -262,7 +262,7 @@ textarea {
 }
 
 .nav-tabs > li, .nav-pills > li {
-  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .nav-pills > li > a {
@@ -288,7 +288,7 @@ textarea {
 }
 
 .alert {
-  padding: 8px 35px 8px 14px;
+  padding: 8px 14px 8px 35px;
   background-color: #fcf8e3;
   border: 1px solid #fbeed5;
   text-shadow: none;
@@ -327,31 +327,64 @@ textarea {
   -webkit-box-shadow: none;
      -moz-box-shadow: none;
           box-shadow: none;
+  -webkit-border-radius: 0;
+     -moz-border-radius: 0;
+          border-radius: 0;
   border: none;
+  padding: 5px 0;
 }
 
 .navbar .brand {
   padding: 8px 20px 12px;
   font-size: 20px;
-  color: #727272;
+  color: #FFFFFF;
+  text-shadow: none;
 }
 
 .navbar .divider-vertical {
   height: 41px;
   background-color: #ffffff;
-  border-right: 1px solid #c6c6c6;
+  border-left: 1px solid #c6c6c6;
 }
 
 .navbar .nav > li > a {
   padding: 10px 10px 11px;
   font-size: 14px;
-  color: #666666;
+  color: #FFFFFF;
+  text-shadow: none;
 }
 
 .navbar .nav > .active > a,
 .navbar .nav > .active > a:hover,
 .navbar .nav > .active > a:focus {
   color: #424242;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle{
+  background: transparent;
+}
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+  line-height: 30px;
+  font-family: "Droid Arabic Kufi", "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.navbar-form{
+  select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input{
+    padding: 4px 10px;
+    -webkit-box-shadow: none;
+       -moz-box-shadow: none;
+            box-shadow: none;
+    border: none;
+    font-size: 1em;
+    line-height: 25px;
+    margin-top: 3px;
+  }
+
+  .btn{
+    margin-top: 3px;
+    padding: 6px 12px 5px;
+  }
 }
 
 .label,
@@ -451,9 +484,9 @@ legend{
 
 .modal-body form .form-actions{
   margin: 0 -15px -15px;
-  -webkit-border-radius: 0 0 6px 6px;
-   -moz-border-radius: 0 0 6px 6px;
-        border-radius: 0 0 6px 6px;
+  -webkit-border-radius: 0 6px 6px 0;
+   -moz-border-radius: 0 6px 6px 0;
+        border-radius: 0 6px 6px 0;
   padding: 5px 20px 15px;
   background: transparent;
   border: none;
@@ -462,4 +495,3 @@ legend{
 .modal-body .control-group{
   margin-bottom: 10px;
 }
-
