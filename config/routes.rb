@@ -3,6 +3,7 @@ Morabeteen::Application.routes.draw do
   devise_for :admins, path: 'admin', path_names: { sign_in: 'sign-in', sign_out: 'sign-out' }
 
   resources :activities
+  resources :leaders, only: :index
   resources :users, only: :show do 
     put :update_achievement
   end

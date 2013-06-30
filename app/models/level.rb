@@ -6,6 +6,7 @@ class Level
   attr_accessor :start_date, :end_date
 
   has_many :schedules
+  has_many :follow_up_activity_messages
 
   accepts_nested_attributes_for :schedules
 

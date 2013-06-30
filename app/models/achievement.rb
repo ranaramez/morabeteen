@@ -22,4 +22,12 @@ class Achievement
     self.completed_tasks.sum(:points)
   end
 
+  def self.calculate_activity_score(achievements, activity)
+    result = 0
+    achievements.each do |a|
+      result += a.completed_tasks.for_activity(activity).sum(:points)
+    end
+    result
+  end
+
 end

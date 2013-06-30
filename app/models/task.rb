@@ -20,6 +20,8 @@ class Task
   # Callbacks
   before_save :handle_common
 
+  scope :for_activity, ->(activity){where(activity: activity)}
+
 
   private
 

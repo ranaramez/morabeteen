@@ -25,6 +25,7 @@ class Schedule
   scope :for_range, ->(date){where(:start_date.lte => date, :end_date.gte => date)}
   scope :within, ->(date){ where(start_date:(date.prev_month..date))}
   scope :with_start_and_end, ->(start, end_date){where(start_date: start, end_date: end_date)}
+  scope :ended, ->{ where(:end_date.lt => Date.today) }
 
   # Callbacks
   before_destroy :check_if_can_destroy
@@ -52,9 +53,19 @@ class Schedule
     UserMailer.schedule_started(users, schedule).deliver
   end
 
-  def self.calculate_stats(schedule_id)
+  def self.calculate_winners(schedule_id)
     schedule = Schedule.find(schedule_id)
-    User.calculate_achievements_stats(schedule.zone)
+    users_to_notify = User.calculate_general_achievements_stats(schedule.zone, schedule.start_date, schedule.end_date)
+    users_to_notify.keys.each_with_index do |user, rank|
+      UserMailer.notify_winner(user, rank+1, schedule).deliver
+    end
+  end
+
+  def self.automated_follow_up(schedule_id)
+  end
+
+  def self.last_schedule(zone)
+    Schedule.zone(zone).ended.desc(&:start_date).first
   end
 
   protected
@@ -69,7 +80,7 @@ class Schedule
   end
 
   def set_stats_delayed_job
-    Schedule.delay(queue: "stats", run_at: self.end_date.to_datetime).calculate_stats(self.id)
+    Schedule.delay(queue: "winners", run_at: (self.end_date + 1).to_datetime.change(hour: 12)).calculate_winners(self.id)
   end
 
   

@@ -10,4 +10,11 @@ class UserMailer < ActionMailer::Base
     sendgrid_recipients users.map(&:email).flatten
     mail to: "users@moravids", subject: "جدول متابعة جديد"
   end
+
+  def notify_winner(user, rank, schedule)
+    @user = user
+    @schedule = schedule
+    @rank = rank
+    mail to: user.email, subject: "ترتيب الاسبوع"
+  end
 end

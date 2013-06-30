@@ -1,0 +1,35 @@
+- if @schedule
+  %h3
+    = t('common.ranking')
+    = t('common.for_period')
+    = @schedule.start_date
+    = t('common.to')
+    = @schedule.end_date
+  .row
+    .span12
+      .general-ranking
+        %h4
+          = t('schedule.general_ranking')
+        - @all_schedule_leaders.keys.each_with_index do |user, rank|
+          %p
+            = rank + 1
+            = t('user.codename') + ":"
+            = user.code_name
+            = t('user.score') + ":"
+            = @all_schedule_leaders[user]
+  .row
+    .activities-ranking
+      - @activities_leaders.keys.each do |act|
+        .span3
+          = t('common.ranking')
+          = act
+          - @activities_leaders[act].keys.each_with_index do |user, rank|
+            %p
+              = rank + 1
+              = t('user.codename') + ":"
+              = user.code_name
+              = t('user.score') + ":"
+              = @activities_leaders[act][user]
+- else
+  %h4
+    = t('leaders.no_ranking_yet')

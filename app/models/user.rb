@@ -90,7 +90,20 @@ class User
   end
 
   def self.calculate_activities_achievements_stats(zone, start_range, end_range)
-    Achievement.for_users(self.send(zone.to_s.pluralize.to_sym).to_a).for_range(start_range, end_range)
+    achievements = Achievement.for_users(self.send(zone.to_s.pluralize.to_sym).to_a).for_range(start_range, end_range)
+    involved_activities = Schedule.with_start_and_end(start_range, end_range).map{|s| s.tasks.map(&:activity)}.flatten.uniq
+    User.get_top_in_activities(achievements, involved_activities)
+  end
+
+  def self.get_top_in_activities(achievements, activities)
+    results = Hash.new
+    achievements = achievements.group_by(&:user)
+    activities.each do |act|
+      results[act.title] = Hash.new
+      achievements.keys.each{|a| results[act.title][a] = (results[act.title][a] || 0) + Achievement.calculate_activity_score(achievements[a], act)}
+      results[act.title] = Hash[*results[act.title].sort_by{|k,v| v}.reverse.take(10).flatten]
+    end
+    results
   end
 
   def role?(role)
