@@ -2,12 +2,12 @@
   .control-label.span2
     = t('common.start_date')
   .controls
-    = select_date Date.today + 1, order: [:day, :month, :year], prefix: "start_date"
+    = select_date Date.today + 1, {order: [:day, :month, :year], prefix: "start_date"}, {class: "span2"}
 .control-group.schedule-fields
   .control-label.span2
     = t('common.end_date')
   .controls
-    = select_date Date.today + 8, order: [:day, :month, :year], prefix: "end_date"
+    = select_date Date.today + 8, {order: [:day, :month, :year], prefix: "end_date"}, {class: "span2"}
 - level = Level.new
 = fields_for "levels[#{level.id}]", level do |l|
   = render partial: "level-details", locals: {f: l, level: level}

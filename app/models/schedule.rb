@@ -28,6 +28,7 @@ class Schedule
 
   # Callbacks
   before_destroy :check_if_can_destroy
+  after_create :notify_users_delayed, :set_stats_delayed_job
 
 
   # Extensions
@@ -45,10 +46,30 @@ class Schedule
     attrs[:description].empty?
   end
 
+  def self.notify_users(schedule_id)
+    schedule = Schedule.find(schedule_id)
+    users = User.send(schedule.zone.to_s.pluralize.to_sym)
+    UserMailer.schedule_started(users, schedule).deliver
+  end
+
+  def self.calculate_stats(schedule_id)
+    schedule = Schedule.find(schedule_id)
+    User.calculate_achievements_stats(schedule.zone)
+  end
+
   protected
 
   def check_if_can_destroy
     return false if self.start_date < Date.today 
+  end
+
+  def notify_users_delayed
+    run_at = self.start_date < Date.today ? Time.now : self.start_date.to_datetime
+    Schedule.delay(queue: "schedules", run_at: run_at).notify_users(self.id)
+  end
+
+  def set_stats_delayed_job
+    Schedule.delay(queue: "stats", run_at: self.end_date.to_datetime).calculate_stats(self.id)
   end
 
   

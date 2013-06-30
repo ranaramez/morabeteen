@@ -15,10 +15,13 @@ gem 'dynamic_form',         '1.1.4'
 gem 'kaminari',             '0.13.0'
 gem 'jquery-rails'
 gem 'twitter-typeahead-rails', github: 'mash-ltd/twitter-typeahead-rails'
-gem 'whenever',             :require => false
 gem 'morrisjs-rails'
 gem 'raphael-rails'
 gem 'cancan',               "~> 1.6.10"
+# gem 'daemons',              "~> 1.1.9"
+gem 'sendgrid'
+gem 'delayed_job_mongoid',  "~> 2.0.0"
+
 
 group :assets do
   gem 'hogan_assets'

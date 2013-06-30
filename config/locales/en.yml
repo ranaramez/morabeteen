@@ -405,6 +405,10 @@ en:
     new: New Schedule
     add_alternative: Add alternative schedule
     fill: Fill schedule
+    title: Schedule title
+
+  level:
+    add: Add level
 
   task:
     duplicate: "Common task"

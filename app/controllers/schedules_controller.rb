@@ -6,8 +6,6 @@ class SchedulesController < ApplicationController
 
   def index
     @schedules = @schedules.desc(:created_at).zone(current_user.gender)
-    # num_of_records = @zone.to_sym == :female ? 2 : 1
-    # @new_schedules = Array.new(num_of_records) {Schedule.new} 
   end
 
   def show
@@ -63,7 +61,6 @@ class SchedulesController < ApplicationController
   def create_multiple
     start_date = *params[:start_date].values_at(:year, :month, :day).map{|c| c.to_i}
     end_date = *params[:end_date].values_at(:year, :month, :day).map{|c| c.to_i}
-    debugger
     values = params[:levels].values.each { |v| v.merge!(start_date: start_date, end_date: end_date)}
     if @levels = Level.create(values)
       flash[:notice] = "Successfully created schedules"

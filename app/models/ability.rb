@@ -7,8 +7,8 @@ class Ability
       can :manage, :all
     else
       can :update, Task
-      can :read, User
-      can :update_achievemnt, User, id: user.id
+      can :read, User, id: user.id
+      can :update_achievement, User, user_id: user.id
     end
   end
 end

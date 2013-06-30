@@ -8,10 +8,10 @@
   
   = f.hidden_field :unchecked_task, class: "achievement-unchecked-task"
   
-  = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks[date]), {selected: option_selected_schedule}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule"}
-  
-  - first_schedule = get_selected(schedules, selected_schedule)
-  .schedule-form{id: "#{date.strftime('%y%m%d')}"}
-    = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks[date] || []}
-  / = f.submit 'Update', class: "btn btn-success"
+  .field
+    = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks[date]), {selected: option_selected_schedule}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule", class: "span2"}
+  .field
+    - first_schedule = get_selected(schedules, selected_schedule)
+    .schedule-form{id: "#{date.strftime('%y%m%d')}"}
+      = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks[date] || []}
 %br

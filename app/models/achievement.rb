@@ -15,6 +15,7 @@ class Achievement
 
   # Scopes
   scope :for, ->(date) { where(date: date)}
+  scope :for_users, ->(users){where(:user.in => users)}
   scope :for_range, ->(start_range, end_range) { where(date:(start_range..end_range))}
 
   def total_score

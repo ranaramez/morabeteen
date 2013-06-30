@@ -1,3 +1,3 @@
 $ ->
   $(document).on 'change', 'select[id$=_achievement_schedule]', (event) ->
-    $(this).nextAll('.schedule-form').html($(this).find(":selected").attr('data-partial'))
+    $(this).parent().closest('div').nextAll('.field').find('.schedule-form').html($(this).find(":selected").attr('data-partial'))

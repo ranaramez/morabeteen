@@ -4,10 +4,14 @@
     = hidden_field_tag :prev_end_date, @end_date
     .fieldset
       = label_tag :start_date
-      = select_date @start_date, order: [:day, :month, :year], class: "span2", prefix: "start_date", disabled: true
+      - if can_edit_start_date?(@schedules.first)
+        = select_date @start_date, {order: [:day, :month, :year], prefix: "start_date"}, {class: "span2"}
+      - else
+        .label.info
+          = @start_date
     .fieldset
       = label_tag :end_date
-      = select_date @end_date, order: [:day, :month, :year], class: "span2", prefix: "end_date"
+      = select_date @end_date, {order: [:day, :month, :year], prefix: "end_date"}, class: "span2"
 
   .modal-footer
     = submit_tag "Update all", class: "btn btn-success"
