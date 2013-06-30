@@ -1,6 +1,6 @@
 // FLAT COLORS VARIABLES //
 
-$flat-green-color: #2ecc71;
+$flat-green-color: #32ac97;
 $flat-green-dark-color: #27ae60;
 
 $flat-red-color: #ff6860;
@@ -19,8 +19,14 @@ html{
   height: 100%; margin: 0; width: 100%;
 }
 
+* { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+
+body * {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
 body{
-  padding-top: 50px;
   overflow: scroll;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
