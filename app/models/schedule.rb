@@ -15,7 +15,7 @@ class Schedule
 
   # Associations
   has_and_belongs_to_many :tasks, inverse_of: :schedules, dependent: :destroy
-  belongs_to :level, dependent: :destroy
+  belongs_to :level
   
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
 
@@ -29,6 +29,7 @@ class Schedule
 
   # Callbacks
   before_destroy :check_if_can_destroy
+  after_destroy :clear_level_if_last
   after_create :notify_users_delayed, :set_stats_delayed_job
 
 
@@ -68,10 +69,18 @@ class Schedule
     Schedule.zone(zone).ended.desc(&:start_date).first
   end
 
+  def check_if_can_destroy
+    self.start_date < Date.today ? false : true
+  end
+
+  def ended?
+    self.end_date < Date.today
+  end
+
   protected
 
-  def check_if_can_destroy
-    return false if self.start_date < Date.today 
+  def clear_level_if_last
+    self.level.destroy unless self.level.schedules.present?
   end
 
   def notify_users_delayed

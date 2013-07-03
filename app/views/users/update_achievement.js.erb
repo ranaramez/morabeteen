@@ -2,6 +2,7 @@
 <%- @date = @response[:date] %>
 <%- date_id = @date.to_date.strftime("%y%m%d") %>
 schedule_data = "<%= escape_javascript(render partial: 'users/schedule-form', locals: {schedules: @schedules, date: @date.to_date, selected_schedule: @response[:schedule_id], completed_tasks: @response[:completed_task_ids]}) %>";
-$("#<%= date_id %>-form").html(schedule_data);
+$("#<%= date_id %>-form .schedule-item").html(schedule_data);
 $("#<%= current_user.id %>-acc-score").html(<%= @response[:acc_score] %>);
-$("#<%= date_id %>-week-score").html(<%= @response[:week_score] %>);
+$("#<%= date_id %>-week-score").html("<%= @response[:week_score] %>");
+$('select').selectpicker();

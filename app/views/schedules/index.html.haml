@@ -29,8 +29,16 @@
                 %th
             %tbody
               %tr.info
-                %td{colspan: 2}
+                %td{colspan: 4}
                   = level.name
+                  - if level.default
+                    %span.label= t('level.default_level')
+                %td
+                  = form_for level, method: :put, class: "form-inline" do |f|
+                    .span2
+                      = f.check_box :default, class: "checkbox span2 assign-default-level"
+                    = f.label t('level.assign_default'), class: "checkbox"
+                      
               - levels[level].each do |schedule|
                 %tr
                   %td
@@ -44,36 +52,9 @@
                     = total_schedule_points(schedule)
                   %th 
                     = link_to t("common.show"), schedule_path(schedule)
-            / - grouped_schedules[s].each do |schedule|
-            /   %tr
-            /     %td
-            /       = link_to schedule_path(schedule) do
-            /         = schedule.title
-            /     %td
-            /       = schedule.created_at.to_date
-            /     %td
-            /       = schedule.tasks.count
-            /     %td
-            /       = total_schedule_points(schedule)
-            /     %th 
-            /       = link_to t("common.show"), schedule_path(schedule)
-          / - @schedules.each do |schedule|
-          /   %tr
-          /     %td
-          /       = link_to schedule_path(schedule) do
-          /         = schedule.title
-          /     %td
-          /       = schedule.start_date
-          /     %td
-          /       = schedule.end_date
-          /     %td
-          /       = schedule.created_at.to_date
-          /     %td
-          /       = schedule.tasks.count
-          /     %td
-          /       = total_schedule_points(schedule)
-          /     %th 
-          /       = link_to t("common.show"), schedule_path(schedule)
+                    - if can_delete?(schedule)
+                      |
+                      = link_to t("common.delete"), schedule_path(schedule), method: :delete
     - else
       .alert
         No schedules yet!
@@ -85,12 +66,6 @@
   = form_tag create_multiple_schedules_path, method: :put do
     .modal-body
       = render partial: "schedule-form"
-    / = form_for Schedule.new do |f|
-    /   .fieldset
-    /     = f.text_field :title, placeholder: t('schedule.title')
-    /     = f.label :start_date
-    /     = f.date_select :start_date, order: [:day, :month, :year], class: "span2"
-
     .modal-footer
       = submit_tag "Create", class: "btn btn-success"
 

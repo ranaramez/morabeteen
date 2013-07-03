@@ -1,0 +1,5 @@
+<%- @start_range = @response[:start_range].to_date %>
+<%- @end_range = @response[:end_range].to_date %>
+timeline_data = "<%= escape_javascript(render partial: 'users/populate_timeline', locals: {schedules: @response[:schedules], start_range: @start_range, end_range: @end_range, completed_tasks: []}) %>";
+$("#<%= @response[:start_range].to_date %>-to-<%= @response[:end_range].to_date %>").html(timeline_data);
+$('select').selectpicker();

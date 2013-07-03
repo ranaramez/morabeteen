@@ -34,6 +34,25 @@ body{
   -webkit-font-smoothing: antialiased;
 }
 
+section{
+  display: block;
+}
+
+ul{
+  list-style: none;
+  display: block;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+li{
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+
 .check-box, .radio-btn{
   color: #777;
 
@@ -70,4 +89,107 @@ body{
   a{
     color: #1e7a6a;
   }
+}
+.timeline{
+  position: relative;
+  border-right: solid 10px #e0e0e0;
+  width: 1160px;
+  padding-right: 0px;
+  padding-top: 40px;
+  margin: 0 auto;
+  padding: 20px 50px;
+}
+
+.flow{
+  zoom: 1;
+
+  .flow:before, .flow:after{
+    content: "";
+    display: table;
+  }
+
+  .flow:after{
+    clear: both;
+  }
+}
+
+.schedule-activity{
+  float: right;
+  width: 750px;
+  min-height: 600px;
+}
+
+section.schedule-activity .schedules .calendar{
+  position: relative;
+  top: 100px;
+  right: -175px;
+  width: 80px;
+  height: 80px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 50%;
+  background: #eee;
+  z-index: 50;
+
+  .date{
+    padding: 30px 0 0 3px;
+  }
+}
+section.schedule-activity .schedules .calendar:before{
+  content: "6";
+  color: #293e6b;
+  font-size: 17px;
+  font-family: 'oli';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  content: "";
+  text-align: center;
+  display: block;
+  line-height: 37px;
+  font-size: 14px;
+  z-index: 100;
+  position: relative;
+}
+
+section.schedule-activity .schedules .schedule-item {
+  .header{
+    min-height: 60px;
+    border-bottom: 1px solid #fff;
+    background: #eee;
+
+    .day-score{
+      float: left;
+    }
+  }
+
+  .content {
+    padding: 20px;
+    position: relative;
+    background: #fafafa;
+  }
+
+  &:before{
+    top: 60px;
+    right: -96px;
+    position: relative;
+    content: " ";
+    display: block;
+    width: 96px;
+    height: 10px;
+    background: #e0e0e0;
+    z-index: 0;  
+  }
+}
+
+section.schedule-activity .schedules>li, section.schedule-activity .schedule>ul>li {
+  margin-bottom: 20px;
+  padding-right: 32px;
+  position: relative;
 }

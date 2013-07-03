@@ -17,4 +17,15 @@ module SchedulesHelper
   def can_extend_end_date?(schedule)
     schedule.end_date >= Date.today
   end
+
+  def can_assign_default?(levels)
+    levels.each do |l|
+      return false if l.default
+    end
+    true
+  end
+
+  def can_delete?(schedule)
+    schedule.check_if_can_destroy
+  end
 end

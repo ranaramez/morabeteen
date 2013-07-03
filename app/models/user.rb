@@ -50,12 +50,15 @@ class User
   field :code_name,          type: String
   field :role,               type: Symbol
 
+  attr_accessor :choosen_level
+
   #Extensions
   slug :code_name
   # mount_uploader :avatar, AvatarUploader
   
   # Relations
   has_many :achievements
+  has_many :levels, class_name: "UserLevel", inverse_of: :user
   
   # Validations
   validates_presence_of :gender
@@ -135,6 +138,10 @@ class User
             else
               achievements.for_range(start_range, end_range)
             end.map{|a| a.completed_tasks.map(&:points)}.flatten.inject(0, :+)
+  end
+
+  def level(date)
+    self.levels.for_date(date).try(:first)
   end
 
   protected

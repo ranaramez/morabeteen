@@ -199,132 +199,22 @@ en:
     <<: *orm
 
   notifications:
-    app_store:
-      oauth:
-        cannot_revoke_core_app: "You can't revoke a core app"
-    common:
-      assure_company: 'You Must be logged in with a company to do that'
-      not_company_admin: 'You have no access to this company'
-      complete_profile: 'Please complete your profile information by visiting %{edit_link}.'
-      link: 'edit profile'
-    companies:
-      invitations:
-        invited: 'Successfully invited %{count} users'
-      profile_updated: 'Profile was successfully edited'
-      now_manager: 'You are now a manager of the company'
-    events:
-      invitations_sent: 'Invitations were sent successfully'
-    feedbacks:
-      created: 'Feedback was created successfully'
-      invalid_request: 'Invalid request'
-      not_allowed: 'You are not allowed to post a feedback to this item'
-      not_allowed_for_this_item: 'You are not allowed to list feedbacks of this item'
-    for_mash:
-      fills:
-        updated: 'Fill updated successfully'
-        form_submitted: 'Your form submission has been submitted successfully'
-        fund_application_submitted: 'Fund application was submitted successfully'
-      templates:
-        attaching_fund_failed: 'Failed attaching your fund to the form'
-    funds:
-      not_fund_provider: 'This entity is not a fund provider'
-      create_fund_after_application: 'Fund will be created after creating the associated application form'
-      created: 'Fund created successfully'
-      fund_updated_after_application: 'Fund is updated successfully and will be associated with this application form after creating it'
-      updated: 'Fund updated successfully'
-      deleted: 'Fund was deleted successfully'
-      deletion_failed: 'Failed deleting this fund'
-      cannot_create_funds: "You don't have access to create funds"
-      not_the_creator: 'You are not the creator of this fund'
-    memberships:
-      members_roles_updated: "Members' roles were updated successfully"
-      members_confirmed: 'Members were confirmed successfully'
-      not_allowed: 'You have no access to this membership'
-      no_access: 'You have no access to this membership'
-    messages:
-      sent: 'Message Sent!'
-      deleted: 'Message Deleted!'
-    trackers:
-      tracked: "%{name} was successfully tracked"
-      untracked: "%{name} was successfully untracked"
-      entity_unavailable: 'The entity you requested is not available'
-    users:
-      company_profile_updated: 'Congratulations, you have updated your company profile information. Enjoy using Raneen.'
-    utilities:
-      switched_entity: 'Succesfully switched to %{name}'
-      switch_error: 'You do not have access to do that'
+    
 
   errors:
     message:
-      event:
-        end_time_after_start_time: 'Event cannot end before starting, please check start and end dates and times'
-        end_date_after_start_date: 'Event cannot end before starting, please check start date and end date'
-        past_event: 'You cannot create event in the past, please check start date and time'
     messages:
-      wrong_size: "is the wrong size (should be %{file_size})"
-      size_too_small: "is too small (should be at least %{file_size})"
-      size_too_big: "is too big (should be at most %{file_size})"
-      event:
-        end_time_after_start_time: 'Event cannot end before starting, please check start and end dates and times'
-        end_date_after_start_date: 'Event cannot end before starting, please check start date and end date'
-        past_event: 'You cannot create event in the past, please check start date and time'
-      feedback_report:
-        already_reported: already reported
-      fund:
-        invalid: 'is invalid'
-      message:
-        unknown_entity_type: 'Unkown entity type'
-      user:
-        must_be_provided: 'must be provided'
 
-    events:
-      deletion_failed: 'Event can not be canceled'
-      invitations_failed: 'Cannot send invitations at the moment please try again later'
-
-  event:
-    add_more_info: Add more info
-    cancel: 'Cancel Event'
-    change_timezone: Change Timezone
-    create_event: 'Create Event'
-    ends: Ends
-    event: 'Event'
-    event_canceled: 'Event Canceled'
-    event_created: 'Event Created'
-    going: Going
-    invitations: Invitations
-    invite_companies_friends: 'Invite companies and friends'
-    maybe: Maybe
-    new_event: 'New Event'
-    no_upcoming_events_yet: No Upcoming events yet!
-    not_going: Not Going
-    ongoing_events: Ongoing events
-    public_events: Public events
-    send_invitations: 'Send Invitations'
-    starts: Starts
-    tamkeen_hq_example: ! 'ex: Tamkeen HQ'
-    technology_session_example: ! 'ex: Technology session'
-    time_questionmark: Time?
-    upcoming_events: Upcoming events
-    upload_photo: 'Upload Photo'
-
-  search:
-    search_ellipsis: Search ...
-    search_for: 'Search for %{query} ...'
-    search_results_for_query: Search results for '%{query}'
-    search_results_for: Search results for
 
   common:
     title: Title
     description: Description
     task: Task
-    points: Points
+    points: points
     accept: Accept
     actions: Actions
-    are_you_sure_questionmark: Are you sure?
-    are_you_sure_to: Are you sure to
     by: By
     cancel: Cancel
-    companies: Companies
     create: 'Create'
     current_users: Current Users
     date_and_time:
@@ -353,53 +243,17 @@ en:
     enter_your_message_here: 'ِEnter your message here...'
     enter_your_reply_here: 'ِEnter your reply here...'
     event: Event
-    events: 'Events'
-    feedback: Feedback
-    feedbacks: Feedbacks
-    follow: Follow
-    followers: Followers
-    following: Following
-    fund_downcase: fund
-    fund_providers: Fund providers
-    installed_apps: Installed Apps
-    message: 'Message'
-    messages: 'Messages'
     more: more..
     more_info: More information..
-    new_message: 'New Message'
-    news_feed: News feed
-    no_activity_notifications: Don’t want activity notifications?
-    no_companies_available: No companies available right now
-    no_messages: 'No Messages!'
-    notifications: 'Notifications'
-    pending_users: Pending Users
-    post: Post
-    privacy: Privacy
-    raneen_copyright_notice: ! '&copy; Raneen %{year}'
-    raneen_rights_reserved: © Raneen 2012 -  All Rights Reserved
-    reject: Reject
     remove: Remove
-    report: Report
-    requests: Requests
-    resources: Resources
     save: Save
     send: 'Send'
-    send_message: Send a message
     settings: Settings
-    share: Share
-    share_your_thoughts: Share your thoughts
-    share_your_thoughts_ellipsis: Share your thoughts...
-    share_your_thoughts_to_everyone: Share your thoughts with us and let everyone know what you're up to
-    show_more_comments: Show more comments (%{count})
-    terms: Terms
     this: this
     to: 'To'
-    unfollow: Unfollow
     upload: 'Upload'
     users: Users
     view: View
-    write_comment: Write a comment..
-    write_something: ! 'Write something ... '
 
   schedule:
     new: New Schedule
@@ -409,6 +263,15 @@ en:
 
   level:
     add: Add level
+    assign_default: Assign default level
+    default: Default Level
+    assigned_default: 'Assigned %{level} to be the default level'
+    un_assigned_default: '%{level} is no longer the default level'
+    selected_level_for_week: Selected level for the week
+    selected: Week level
+
+  achievement:
+    week_score: Week score
 
   task:
     duplicate: "Common task"

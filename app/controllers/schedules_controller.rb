@@ -38,7 +38,7 @@ class SchedulesController < ApplicationController
     if @schedule.destroy
       flash[:notice] = "Successfully deleted schedule"
     end
-    respond_with @schedule
+    respond_with @schedule, location: schedules_path
   end
 
   def edit_multiple

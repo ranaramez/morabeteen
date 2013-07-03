@@ -4,8 +4,10 @@ Morabeteen::Application.routes.draw do
 
   resources :activities
   resources :leaders, only: :index
+  resources :levels
   resources :users, only: :show do 
     put :update_achievement
+    put :update_level
   end
   resources :schedules do
     collection do
