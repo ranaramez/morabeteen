@@ -4,7 +4,9 @@ Morabeteen::Application.routes.draw do
 
   resources :activities
   resources :leaders, only: :index
-  resources :levels
+  resources :levels do
+    resources :follow_up_messages
+  end
   resources :users, only: :show do 
     put :update_achievement
     put :update_level

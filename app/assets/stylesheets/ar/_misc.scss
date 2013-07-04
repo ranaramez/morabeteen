@@ -38,20 +38,19 @@ section{
   display: block;
 }
 
-ul{
-  list-style: none;
-  display: block;
-  -webkit-margin-before: 1em;
-  -webkit-margin-after: 1em;
-  -webkit-margin-start: 0px;
-  -webkit-margin-end: 0px;
-  -webkit-padding-start: 40px;
-}
+// ul{
+//   display: block;
+//   -webkit-margin-before: 1em;
+//   -webkit-margin-after: 1em;
+//   -webkit-margin-start: 0px;
+//   -webkit-margin-end: 0px;
+//   -webkit-padding-start: 40px;
+// }
 
-li{
-  display: list-item;
-  text-align: -webkit-match-parent;
-}
+// li{
+//   display: list-item;
+//   text-align: -webkit-match-parent;
+// }
 
 .check-box, .radio-btn{
   color: #777;
@@ -188,8 +187,24 @@ section.schedule-activity .schedules .schedule-item {
   }
 }
 
+section.schedule-activity ul{
+  list-style: none;
+}
+
 section.schedule-activity .schedules>li, section.schedule-activity .schedule>ul>li {
   margin-bottom: 20px;
   padding-right: 32px;
   position: relative;
+}
+
+.message-fields{
+
+  text-area{
+    height: 200px;
+  }
+}
+
+.messages-table{
+  overflow: hidden;
+  height: 100%;
 }

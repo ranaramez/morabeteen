@@ -1,0 +1,42 @@
+%ul.breadcrumb
+  %li
+    = link_to t('common.schedules'), schedules_path
+    %span.divider
+  %li
+    = link_to t('common.follow_up_messages'), level_follow_up_messages_path(@level.id), class: "active"
+    %span.divider
+= tinymce_assets
+- new_record = @message.new_record?
+= form_for @message, url: (new_record ? level_follow_up_messages_path(@level.id) : level_follow_up_message_path(@level.id, @message)), method: (new_record ? :post : :put), class: "form-inline" do |f|
+  = render partial: "follow_up_activity_message_fields", locals: {f: f, new_record: new_record}
+.span7.messages-table
+  %table.table.table-striped
+    %thead
+      %tr
+        %th Start range
+        %th End range
+        %th message
+        %th
+    %tbody
+      - if @messages.empty?
+        %tr.info
+          %td{colspan: 4}
+            = t('follow_up.no_messages_yet')
+      - else
+        - grouped_messages = @messages.group_by(&:activity)
+        - grouped_messages.keys.each do |activity|
+          %tr.info
+            %td{colspan: 4}
+              - if activity
+                = activity.try(:title)
+              - else
+                = t('activity.general')
+          - grouped_messages[activity].each do |message|
+            %tr
+              %td= message.start_range
+              %td= message.end_range
+              %td= raw(message.message).truncate(30)
+              %td
+                = link_to t("common.view"), level_follow_up_messages_path([@level], message: message)
+                |
+                = link_to t("common.delete"), level_follow_up_message_path(@level, message), method: :delete

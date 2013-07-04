@@ -29,10 +29,12 @@
                 %th
             %tbody
               %tr.info
-                %td{colspan: 4}
+                %td{colspan: 3}
                   = level.name
                   - if level.default
                     %span.label= t('level.default_level')
+                %td
+                  = link_to t('level.add_follow_up_messages'), level_follow_up_messages_path(level)
                 %td
                   = form_for level, method: :put, class: "form-inline" do |f|
                     .span2
