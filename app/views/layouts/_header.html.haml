@@ -19,7 +19,7 @@
                   %li
                     = link_to t('common.my_schedule'), user_path(current_user.id)
                   %li
-                    = link_to "Settings", "#"
+                    = link_to "الاعدادات", "#"
                   - if current_user.role?(:admin)
                     %li
                       = link_to "Admin dashboard", admin_dashboard_path

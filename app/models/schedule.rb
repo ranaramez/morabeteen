@@ -16,7 +16,7 @@ class Schedule
   # Associations
   has_and_belongs_to_many :tasks, inverse_of: :schedules, dependent: :destroy
   belongs_to :level
-  
+
   accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
 
   # Scopes
@@ -92,5 +92,5 @@ class Schedule
     Schedule.delay(queue: "winners", run_at: (self.end_date + 1).to_datetime.change(hour: 12)).calculate_winners(self.id)
   end
 
-  
+
 end
