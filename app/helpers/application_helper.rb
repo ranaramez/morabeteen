@@ -13,6 +13,17 @@ module ApplicationHelper
     echo.html_safe
   end
 
+  def error_messages!
+    return "" if resource.errors.empty?
+
+    messages = resource.errors.full_messages.map { |msg| content_tag(:li, msg) }.join.html_safe
+    sentence = I18n.t("errors.messages.not_saved",
+                      :count => resource.errors.count,
+                      :resource => resource.class.model_name.human.downcase)
+
+    render partial: 'shared/error_messages', :locals => { :sentence => sentence, :messages => messages }
+  end
+
   def notification_item(notification)
     need = notification.subject_type.constantize.find(notification.subject_id)
     need_thumb = need.selected_image.payload.notification_thumb.url

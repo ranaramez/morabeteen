@@ -21,6 +21,7 @@ gem 'cancan',               "~> 1.6.10"
 # gem 'daemons',              "~> 1.1.9"
 gem 'sendgrid'
 gem 'delayed_job_mongoid',  "~> 2.0.0"
+gem 'tinymce-rails'
 
 
 group :assets do

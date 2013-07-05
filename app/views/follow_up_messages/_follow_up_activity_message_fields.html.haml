@@ -1,0 +1,18 @@
+.span8.well.message-fields
+  - unless new_record
+    = link_to t('follow_up.new_record'), level_follow_up_messages_path(@level.id), class: "btn"
+  = f.error_messages header_tag: 'h4', message: nil, class: 'alert alert-error'
+  %h5
+    = t('follow_up.score_range')
+  = f.number_field :start_range, class: "span3", placeholder: t('follow_up.from_example')
+  = f.number_field :end_range, class: "span3", placeholder: t('follow_up.to_example')
+  .control-group
+    = f.label :activity
+    = f.select :activity_id, involved_activities(@level)
+  .control-group
+    = f.label :message, class: "control-label"
+    .controls
+      = f.text_area :message, placeholder: t('follow_up.message'), class: "tinymce span7", rows: 10
+      = tinymce
+  .row-fluid
+    = f.submit "Save", class: "btn btn-success"

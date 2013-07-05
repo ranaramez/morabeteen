@@ -11,7 +11,7 @@ class Level
   has_many :follow_up_activity_messages
   has_many :users, class_name: "UserLevel", inverse_of: :level
 
-  accepts_nested_attributes_for :schedules
+  accepts_nested_attributes_for :schedules, :follow_up_activity_messages
 
   before_create :assign_schedule_dates
   before_save :clear_all_defaults, if: :default

@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     else
       @achievement = current_user.achievements.create params[:achievement]
     end
-    @schedules = Schedule.zone(current_user.gender).for_range(params[:achievement][:date])
+    @schedules = current_user.level(Date.today).try(:level).try(:schedules) || Schedule.zone(current_user.gender).for_range(params[:achievement][:date])
     @achievements = current_user.achievements
     @completed_tasks = current_user.completed_tasks_by_day(@achievements)
     @date = params[:achievement][:date]
