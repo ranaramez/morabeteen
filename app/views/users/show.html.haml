@@ -1,51 +1,52 @@
-.profile-header.clearfix
-  / .user-avatar.three.columns
-  /   = image_tag @user.avatar.profile.url
-  .user-info.span9
-    .info.span6
-      .user-name
-        = @user.name
-    .action-info.six.columns
-      .span3.count
-        .numbers{id: "#{@user.id}-acc-score"}
-          = total_acc_score
-        %label
-          Points
-.timeline.flow
-  .main-content.clearfix
-    %section.schedule-activity
-      #days-activity
-        %ul.schedules
-          - if @schedules.present?
-            - grouped_schedules = @schedules.desc(:start_date).group_by(&:start_date)
-            - grouped_schedules.keys.each_with_index do |s,x|
-              - start_date = grouped_schedules[s].first.start_date
-              - end_date = grouped_schedules[s].first.end_date
-              - user_level = current_user.level(start_date)
-              - current_level = user_level.level if user_level
-              - level_schedules = level_schedules(grouped_schedules[s], current_level)
-              - unless missed_schedule?(start_date, end_date)
-                %li.clearfix
-                  .calendar
-                    .date
-                      = t('level.selected')
-                  .schedule-item{id: "option-level-select"}
-                    = render partial: "level_select", locals: {start_date: start_date, end_date: end_date, schedules: grouped_schedules[s], current_level: current_level}
+.container-fluid
+  .profile-header.clearfix
+    / .user-avatar.three.columns
+    /   = image_tag @user.avatar.profile.url
+    .user-info.span9
+      .info.span6
+        .user-name
+          = @user.name
+      .action-info.six.columns
+        .span3.count
+          .numbers{id: "#{@user.id}-acc-score"}
+            = total_acc_score
+          %label
+            Points
+  .timeline.flow
+    .main-content.clearfix
+      %section.schedule-activity
+        #days-activity
+          %ul.schedules
+            - if @schedules.present?
+              - grouped_schedules = @schedules.desc(:start_date).group_by(&:start_date)
+              - grouped_schedules.keys.each_with_index do |s,x|
+                - start_date = grouped_schedules[s].first.start_date
+                - end_date = grouped_schedules[s].first.end_date
+                - user_level = current_user.level(start_date)
+                - current_level = user_level.level if user_level
+                - level_schedules = level_schedules(grouped_schedules[s], current_level)
+                - unless missed_schedule?(start_date, end_date)
+                  %li.clearfix
+                    .calendar
+                      .date
+                        = t('level.selected')
+                    .schedule-item{id: "option-level-select"}
+                      = render partial: "level_select", locals: {start_date: start_date, end_date: end_date, schedules: grouped_schedules[s], current_level: current_level}
 
-                - start_range = x == 0 ? (grouped_schedules[s].first.end_date < Date.today  ? grouped_schedules[s].first.end_date : Date.today) : grouped_schedules.keys[x-1] - 1
-                %li.week-points.clearfix
-                  .calendar
-                    .date
-                      = t('achievement.week_score')
-                  .schedule-item
-                    .content.clearfix
-                      %h4
-                        %span.numbers{id: "#{start_range.strftime('%y%m%d')}-week-score"}
-                          = total_week_score(s, start_range)
-                        = t('common.points')
-                %ul
-                  .schedule{id: "#{start_range}-to-#{s}"}
-                    = render partial: 'users/populate_timeline', locals: {start_range: start_range, end_range: s, schedules: grouped_schedules[s], completed_tasks: @completed_tasks}
-                
-          - else
-            No schedules yet!
+                  - start_range = x == 0 ? (grouped_schedules[s].first.end_date < Date.today  ? grouped_schedules[s].first.end_date : Date.today) : grouped_schedules.keys[x-1] - 1
+                  %li.week-points.clearfix
+                    .calendar
+                      .date
+                        = t('achievement.week_score')
+                    .schedule-item
+                      .content.clearfix
+                        %h4
+                          %span.numbers{id: "#{start_range.strftime('%y%m%d')}-week-score"}
+                            = total_week_score(s, start_range)
+                          = t('common.points')
+                  %ul
+                    .schedule{id: "#{start_range}-to-#{s}"}
+                      = render partial: 'users/populate_timeline', locals: {start_range: start_range, end_range: s, schedules: grouped_schedules[s], completed_tasks: @completed_tasks}
+
+            - else
+              No schedules yet!

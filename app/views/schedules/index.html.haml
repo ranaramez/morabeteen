@@ -1,7 +1,10 @@
-.row-fluid.span12
-  = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
-  - if @schedules.present?
-    .span10
+.container-fluid
+  %h3
+    Schedules
+    %span.pull-right
+      = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
+  .row-fluid
+    - if @schedules.present?
       - grouped_schedules = @schedules.group_by(&:start_date)
       - grouped_schedules.keys.each do |s|
         %table.table
@@ -16,7 +19,7 @@
               %td= grouped_schedules[s].first.end_date.strftime('%d-%m-%Y')
               %td
                 - if can_edit_schedule?(grouped_schedules[s].first)
-                  = link_to "Edit Date", edit_multiple_schedule_path(grouped_schedules[s].first), data: {toggle: "modal", remote: true, target: "#edit-schedule-date"}
+                  = link_to "Edit Date", edit_multiple_schedule_path(grouped_schedules[s].first), data: {toggle: "modal", remote: true, target: "#edit-schedule-date"}, class: 'btn'
         - levels = grouped_schedules[s].group_by(&:level)
         - levels.keys.each do |level|
           %table.table.table-striped
@@ -65,7 +68,7 @@
     = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
     %h3 
       = t('schedule.new')
-  = form_tag create_multiple_schedules_path, method: :put do
+  = form_tag create_multiple_schedules_path, method: :put, class: 'form-horizontal' do
     .modal-body
       = render partial: "schedule-form"
     .modal-footer
@@ -76,4 +79,4 @@
     = link_to "×", '', class: "close", :'data-dismiss' => "modal", :'aria-hidden' => true
     %h3 
       = t('schedule.edit_date')
-    #date-form
+  #date-form

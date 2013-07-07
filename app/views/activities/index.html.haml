@@ -1,12 +1,12 @@
-%h3 Activities
-.row-fluid
-  .span4
-    = form_for @activty || Activity.new do |f|
-      = f.text_field :title, placeholder: "Title"
-      = f.submit "create", class: "btn btn-success"
-.row-fluid
-  .span4
-    - @activities.each do |activity|
-      .activity-title
-        = activity.title
-        = link_to "Delete", activity_path(activity), method: :delete
+.container-fluid
+  .row-fluid.activities
+    .span4.offset4
+      %h3 Activities
+      = form_for @activty || Activity.new do |f|
+        = f.text_field :title, placeholder: "Title"
+        = f.submit "Create", class: "btn btn-success"
+      .activities-list
+        - @activities.each do |activity|
+          %span.activity-title.label
+            = activity.title
+            = link_to "X", activity_path(activity), method: :delete
