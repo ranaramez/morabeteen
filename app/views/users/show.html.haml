@@ -29,16 +29,8 @@
                   .calendar
                     .date
                       = t('level.selected')
-                  .schedule-item
-                    .content.clearfix
-                      %h4
-                        - unless show_level_select?(start_date, end_date, grouped_schedules[s])
-                          = form_for current_user, url: user_update_level_path(current_user.id), method: :put, remote: true do |f|
-                            = t('level.selected_level_for_week')
-                            = f.select :choosen_level, level_select(grouped_schedules[s].map(&:level).uniq), {}, {class: "span2", id: "level-select"}
-                        - else
-                          = t('level.selected_level_for_week')
-                          = current_level.name
+                  .schedule-item{id: "option-level-select"}
+                    = render partial: "level_select", locals: {start_date: start_date, end_date: end_date, schedules: grouped_schedules[s], current_level: current_level}
 
                 - start_range = x == 0 ? (grouped_schedules[s].first.end_date < Date.today  ? grouped_schedules[s].first.end_date : Date.today) : grouped_schedules.keys[x-1] - 1
                 %li.week-points.clearfix

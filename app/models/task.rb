@@ -8,19 +8,18 @@ class Task
   attr_accessor :common
 
   # Associations
-  has_and_belongs_to_many :schedules, inverse_of: :tasks
-  belongs_to :activity
+  belongs_to :activity_task
 
   # has_and_belongs_to_many :common_schedules, class_name: "Schedule", inverse_of: :common_tasks
 
   # Validations
-  validates_presence_of :description, :points, :schedules, :activity
+  validates_presence_of :description, :points, :activity_task
   validates :points, numericality: {greater_than: 0}
 
   # Callbacks
   before_save :handle_common
 
-  scope :for_activity, ->(activity){where(activity: activity)}
+  # scope :for_activity, ->(activity){where(activity: activity)}
 
 
   private

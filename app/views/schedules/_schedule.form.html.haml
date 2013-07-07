@@ -1,0 +1,24 @@
+.container-fluid
+  = link_to "<< All Schedules", schedules_path, class: "btn"
+  %h3 
+    = @schedule.title
+    %span.label
+      = @schedule.level.name
+  = form_for @schedule, method: :put do |f|
+    .row-fluid
+      .span5
+        = f.error_messages header_tag: 'h4', message: nil, class: 'alert alert-error'
+    .row-fluid
+      .tasks-builder
+        = f.text_field :title, placeholder: t('common.title'), class: "span2"
+        = f.fields_for :activity_tasks do |t|
+          .row-fluid
+            .span5
+              = t.error_messages header_tag: 'h4', message: nil, class: 'alert alert-error'
+          - t.object.tasks.build
+          = render partial: "activity_task_fields", locals: {f: t}
+        .add-task
+          = link_to_add_fields t("schedule.add_category"), f, :activity_tasks
+      
+    .row-fluid
+      = f.submit "Save", class: "btn btn-success"

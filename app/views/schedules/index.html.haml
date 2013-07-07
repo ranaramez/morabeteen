@@ -49,9 +49,9 @@
                   %td
                     = schedule.created_at.to_date
                   %td
-                    = schedule.tasks.count
+                    = schedule.tasks_count
                   %td
-                    = total_schedule_points(schedule)
+                    = schedule.total_points
                   %th 
                     = link_to t("common.show"), schedule_path(schedule)
                     - if can_delete?(schedule)

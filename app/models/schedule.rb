@@ -14,11 +14,10 @@ class Schedule
   field :zone, type: Symbol
 
   # Associations
-  has_and_belongs_to_many :tasks, inverse_of: :schedules, dependent: :destroy
   belongs_to :level
-  
-  accepts_nested_attributes_for :tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
+  has_many :activity_tasks, inverse_of: :schedule, dependent: :destroy
 
+  accepts_nested_attributes_for :activity_tasks, allow_destroy: true, reject_if: ->(attrs){empty_task?(attrs)}
   # Scopes
   scope :zone, ->(zone){ where(zone: zone)}
   scope :for, ->(date){ where(start_date: date)}
@@ -33,6 +32,9 @@ class Schedule
   after_create :notify_users_delayed, :set_stats_delayed_job
 
 
+  # Validations
+  # TODO 
+
   # Extensions
   slug :title
 
@@ -45,7 +47,7 @@ class Schedule
   end
 
   def self.empty_task?(attrs)
-    attrs[:description].empty?
+    attrs[:tasks_attributes].empty?
   end
 
   def self.notify_users(schedule_id)
@@ -75,6 +77,20 @@ class Schedule
 
   def ended?
     self.end_date < Date.today
+  end
+
+  def tasks_count
+    self.activity_tasks.map(&:tasks).flatten.count
+  end
+
+  def total_points
+    self.activity_tasks.map{|a| a.total_points}.flatten.inject(0, :+)
+  end
+
+  def activitis_score_hash
+    resutls = Hash.new
+    self.activity_tasks.each{|at| resutls[at.activity] = at.tasks.sum(:points)}
+    resutls
   end
 
   protected

@@ -8,16 +8,18 @@ class Achievement
   # Associations
   belongs_to :user
   has_and_belongs_to_many :completed_tasks, class_name: 'Task', inverse_of: nil, after_add: :assing_level, after_remove: :unassign_level
+  belongs_to :schedule
 
   # Attr 
   attr_accessor :unchecked_task
-  attr_accessor :schedule_id
 
   # Scopes
   scope :for, ->(date) { where(date: date)}
   scope :for_users, ->(users){where(:user.in => users)}
   scope :for_range, ->(start_range, end_range) { between(date: start_range..end_range)}
   scope :with_level, ->{where(:level.ne => nil)}
+
+  after_create ->{self.assing_level(completed_tasks.first)}
 
   validates_presence_of :date, :user
 
@@ -33,11 +35,17 @@ class Achievement
     result
   end
 
+  def self.total_score(achievements)
+    score = 0
+    achievements.each{ |a| score += a.completed_tasks.sum(:points) }
+    score
+  end
+
   protected
 
   def assing_level(e)
     unless self.user.level(self.date)
-      schedule = e.schedules.first
+      schedule = e.activity_task.schedule
       user_level = self.user.levels.create(start_date: schedule.start_date, end_date: schedule.end_date, level: schedule.level)
     end
     user_level

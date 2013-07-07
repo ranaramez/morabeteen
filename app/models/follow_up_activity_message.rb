@@ -13,6 +13,11 @@ class FollowUpActivityMessage
   validates_presence_of :start_range, :end_range, :message
   validate :start_range_less_than_end_range, if: ->{start_range >= end_range}
 
+  scope :for_levels, ->(levels){ where(:level.in => levels)}
+  scope :activity, ->(activity){where(activity: activity)}
+  scope :range, ->(value){ where(:start_range.lte => value, :end_range.gte => value)}
+  scope :level, ->(level){ where(level: level)}
+  
   def start_range_less_than_end_range
     errors.add(:start_range, I18n.t('mongoid.errors.models.follow_up_activity_message.attributes.start_range.start_range_less_than_end_range'))
   end

@@ -58,6 +58,22 @@ en:
               start_range_less_than_end_range: should be less than end range
             message:
               blank: can't be blank
+        task:
+          attributes:
+            points:
+              not_a_number: 'is not a number, make sure all tasks have numeric points'
+              blank: can't be blank
+              greater_than: should be greater than 0
+
+        activity_task:
+          attributes:
+            tasks:
+              invalid: is invalid
+
+        schedule:
+          attributes:
+            activity_tasks:
+              invalid: is invalid
 
     models:
       admin: Admin
