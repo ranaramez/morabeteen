@@ -5,6 +5,10 @@ body {
   background-color: #ffffff;
 }
 
+[class^="icon-"], [class*=" icon-"]{
+  vertical-align: inherit;
+}
+
 a {
   color: #ff6855;
 }
@@ -356,6 +360,11 @@ textarea {
 }
 .navbar .nav > li > a:hover, .navbar .nav > li > a:focus{
   color: #1f7567;
+}
+
+.dropdown-menu .divider{
+	background-color: #dddddd;
+	border-bottom-color: #dddddd;
 }
 
 .navbar .nav li.dropdown > .dropdown-toggle .caret{

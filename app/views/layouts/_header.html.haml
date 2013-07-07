@@ -1,7 +1,7 @@
 .navbar
   .navbar-inner
-    .container-fluid
-      .row-fluid
+    %div{class: current_page?(root_path) ? "container-fluid" : "container"}
+      %div{class: current_page?(root_path) ? "row-fluid" : "row"}
         .span4
           .clearfix
             = link_to 'المرابطين',root_path, class: 'brand'

@@ -31,6 +31,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'best_in_place', '~> 2.1.0'
   gem "icheck-rails", "~> 0.9.0.2"
+  gem "font-awesome-rails", "~> 3.2.1.1"
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby

@@ -10,15 +10,29 @@
               [رواه النسائي]
 
   .stat-progress
-    .container-fluid
-      .row-fluid
+    .container
+      .row
         .span12
-          .progress.progress-striped.active
-            .bar{style: "width: 33.333333333%;"}
+          .current-date
+            ٢٤ رمضان - ١٤٣٤ هجرياً
 
-  .container-fluid
-    .row-fluid
-      .span4.offset1
+          .progress-popover
+            - flag = 940*60/100-31;
+            %i.icon-flag-checkered{style: "right: #{flag}px"}
+
+          .progress.progress-striped.active
+            .bar{style: "width: 60%;"}
+          .month-stat
+            .month-block
+              شعبان
+            .month-block
+              رمضان
+            .month-block
+              شوال
+
+  .container
+    .row
+      .span5
         .landing-signup
           %h3
             التسجيل
