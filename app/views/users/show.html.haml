@@ -1,17 +1,20 @@
-.container-fluid
-  .profile-header.clearfix
-    / .user-avatar.three.columns
-    /   = image_tag @user.avatar.profile.url
-    .user-info.span9
-      .info.span6
-        .user-name
-          = @user.name
-      .action-info.six.columns
-        .span3.count
+.container-fluid.profile-wrapper
+  .row-fluid
+    .profile-header.clearfix
+      .user-avatar.span2
+        / = image_tag @user.avatar.profile.url
+        = image_tag 'avatar.png'
+      .user-info.span10
+        .info.span2
+          .user-name
+            / = @user.name
+            عمر بن الخطاب
+        .action-info.span8
           .numbers{id: "#{@user.id}-acc-score"}
             = total_acc_score
           %label
-            Points
+            درجة
+
   .timeline.flow
     .main-content.clearfix
       %section.schedule-activity
