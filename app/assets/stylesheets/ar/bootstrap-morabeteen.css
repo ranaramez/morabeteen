@@ -425,7 +425,7 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .label-success,
 .badge-success {
-  background-color: #f89406;
+  background-color: #468847;
 }
 
 .label-info,
@@ -497,7 +497,7 @@ legend{
   background-color: #28323C;
 }
 
-.modal-body form{
+.modal form{
   margin: 0;
 }
 

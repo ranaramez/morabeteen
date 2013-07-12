@@ -1,10 +1,10 @@
 .control-group.schedule-fields
-  .control-label.span2
+  .control-label
     = t('common.start_date')
   .controls
     = select_date Date.today + 1, {order: [:day, :month, :year], prefix: "start_date"}, {class: "span2"}
 .control-group.schedule-fields
-  .control-label.span2
+  .control-label
     = t('common.end_date')
   .controls
     = select_date Date.today + 8, {order: [:day, :month, :year], prefix: "end_date"}, {class: "span2"}

@@ -11,11 +11,11 @@
           .span6.tasks-builder
             = fields_for "schedules[#{schedule.id}]", schedule do |s|
               = s.text_field :title, placeholder: t('common.title'), class: "span6"
-              - schedule.tasks.build
-              = s.fields_for :tasks do |t|
-                = render partial: "task_fields", locals: {f: t}
+              - schedule.activity_tasks.build
+              = s.fields_for :activity_tasks do |t|
+                = render partial: "activity_task_fields", locals: {f: t}
             .add-task
-              = link_to_add_fields "Add Task", schedule, :tasks 
+              = link_to_add_fields t("schedule.add_category"), schedule, :activity_tasks 
                 
 
       .row-fluid

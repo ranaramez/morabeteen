@@ -1,4 +1,10 @@
-- schedule.tasks.each do |task|
-  .span3  
-    = check_box_tag 'achievement[completed_task_ids][]', task.id, check_completed(task, date, completed_tasks), class: "checkable-task"
-    = task.description
+- schedule.activity_tasks.each do |act|
+  .activiy
+    .row
+      .alert.alert-info.span8
+        = act.activity.title
+    .row.span10
+      - act.tasks.each do |task|
+        .span3  
+          = check_box_tag 'achievement[completed_task_ids][]', task.id, check_completed(task, date, completed_tasks), class: "checkable-task"
+          = task.description

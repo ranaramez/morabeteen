@@ -5,4 +5,6 @@ schedule_data = "<%= escape_javascript(render partial: 'users/schedule-form', lo
 $("#<%= date_id %>-form .schedule-item").html(schedule_data);
 $("#<%= current_user.id %>-acc-score").html(<%= @response[:acc_score] %>);
 $("#<%= date_id %>-week-score").html("<%= @response[:week_score] %>");
+level = "<%= escape_javascript(render partial: 'users/level_select', locals: {schedules: @schedules, end_date: @schedules.first.end_date, start_date: @schedules.first.start_date, current_level: @response[:current_level]}) %>";
+$("#option-level-select").html(level);
 $('select').selectpicker();

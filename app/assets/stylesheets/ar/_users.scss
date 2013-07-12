@@ -1,5 +1,29 @@
+.badges{
+  background: url(badges.png) no-repeat top left;
+  &.abdelrahman{ background-position: 0 0; width: 70px; height: 70px; }
+  &.abubakr{ background-position: -75px 0; width: 70px; height: 70px; }
+  &.abuobayda{ background-position: -150px 0; width: 70px; height: 70px; }
+  &.ali{ background-position: -225px 0; width: 70px; height: 70px; }
+  &.elzober{ background-position: -300px 0; width: 70px; height: 70px; }
+  &.omr{ background-position: -375px 0; width: 70px; height: 70px; }
+  &.othman{ background-position: -450px 0; width: 70px; height: 70px; }
+  &.saad{ background-position: -525px 0; width: 70px; height: 70px; }
+  &.saed{ background-position: -600px 0; width: 70px; height: 70px; }
+  &.talha{ background-position: -675px 0; width: 70px; height: 70px; }
+}
+
 .profile-wrapper{
   .user-avatar{
     margin-left: 20px;
+  }
+
+  .badges-list{
+    margin: 10px 0;
+    list-style: none;
+
+    li{
+      float: right;
+      margin-left: 5px;
+    }
   }
 }

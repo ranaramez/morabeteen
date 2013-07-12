@@ -18,11 +18,11 @@ module UsersHelper
   end
 
   def day_score(date)
-    current_user.achievements.for(date).try(:first).try(:total_score) || 0
+    current_user.achievements.for(date).map{ |a| a.total_score }.flatten.inject(0, :+)
   end
 
   def get_selected(schedules, selected)
-    return schedules.find(selected) if selected.present?
+    return schedules.select{|s| s==selected}.first if selected.present?
     return schedules.first
   end
 
@@ -64,5 +64,9 @@ module UsersHelper
     else
       schedules
     end
+  end
+
+  def get_selected_schedule_for_date(date)
+    @achievements.for(date).desc(:updated_at).try(:first).try(:schedule)
   end
 end

@@ -94,7 +94,7 @@ class User
 
   def self.calculate_activities_achievements_stats(zone, start_range, end_range)
     achievements = Achievement.for_users(self.send(zone.to_s.pluralize.to_sym).to_a).for_range(start_range, end_range)
-    involved_activities = Schedule.with_start_and_end(start_range, end_range).map{|s| s.tasks.map(&:activity)}.flatten.uniq
+    involved_activities = Schedule.zone(zone).with_start_and_end(start_range, end_range).map{|s| s.tasks.map(&:activity)}.flatten.uniq
     User.get_top_in_activities(achievements, involved_activities)
   end
 
@@ -107,6 +107,133 @@ class User
       results[act.title] = Hash[*results[act.title].sort_by{|k,v| v}.reverse.take(10).flatten]
     end
     results
+  end
+
+  # Follow up for each user 
+  def self.follow_up_report(zone, start_range, end_range)
+    achievements = Achievement.for_users(self.send(zone.to_s.pluralize.to_sym).to_a).for_range(start_range, end_range)
+    # zone_schedules = Schedule.zone(:male).with_start_and_end(start_range, end_range)
+    zone_schedules = Schedule.zone(zone)
+    activities_w_scores = Hash.new
+    zone_schedules.each do |s|
+      activities_w_scores[s] = s.activitis_score_hash
+    end
+    activities_w_scores
+    follow_up_messages = FollowUpActivityMessage.for_levels(zone_schedules.map(&:level).flatten.uniq)
+    User.think(achievements, activities_w_scores, follow_up_messages, start_range, end_range)
+  end
+
+
+  def self.think(achievements, activities_hash, messages, start_range, end_range)
+    results = Hash.new
+    users_ach = achievements.group_by(&:user)
+    users_ach.keys.each do |user|
+      results[user] = user.prepare_user_score_hash(users_ach[user], activities_hash)
+      # date_ach: hash of keys[date] and values = achievements
+      date_ach = users_ach[user].group_by(&:date)
+      # get selected schedule for the week or the first few days
+      selected_schedule = user.first_selected_schedule_from_achievements(start_range, date_ach)
+      # Looping through week days and calculates each day score and updates the results[user] hash with the calculated values
+      user.calculate_days_score_hash(start_range, end_range, date_ach, selected_schedule, results[user], activities_hash)
+      user.follow_up_messages_with_score(messages, results[user], user.level(start_range).level)
+    end
+    results
+  end
+
+  def calculate_days_score_hash(start_range, end_range, date_ach, selected_schedule, user_hash, activities_hash)
+    start_range.upto(end_range).each do |date|
+      ## act_tasks_ach: hash of keys[activity_task] and values = completed_task
+      act_tasks_ach = date_ach[date].map(&:completed_tasks).flatten.group_by{|t| t.activity_task.activity} if date_ach[date]
+      user_hash.keys.each do |s|
+        next if selected_schedule && selected_schedule != s
+        user_hash[s].keys.each do |ac|
+          total_score = activities_hash[s][ac]
+          day_score = date_ach[date] &&  act_tasks_ach[ac] ? act_tasks_ach[ac].map(&:points).flatten.inject(0, :+) : 0
+          user_hash[s][ac] << ((day_score/(total_score*1.0))*100).ceil
+        end
+      end
+      selected_schedule = date_ach[date].first.schedule if date_ach[date].try(:count) == 1
+    end
+  end
+
+  def follow_up_messages_with_score(messages, user_hash, user_level)
+    user_hash.keys.each do |s|
+      user_hash[s].keys.each do |a|
+        unless user_hash[s][a].empty?
+          tmp_hash = Hash.new
+          tmp_hash[:score] = (user_hash[s][a].flatten.inject(0, :+) / (user_hash[s][a].count*1.0)).ceil
+          tmp_hash[:message] = messages.level(user_level).activity(a).range(tmp_hash[:score]).try(:first).try(:message)
+          user_hash[s][a] = tmp_hash
+        end
+      end
+    end
+  end
+
+  def first_selected_schedule_from_achievements(start_range, date_ach)
+    first_date = start_range
+    while date_ach[first_date].nil?
+      first_date += 1
+    end
+    date_ach[first_date].first.schedule if date_ach[first_date].count == 1
+  end
+
+  def prepare_user_score_hash(users_ach, activities_hash)
+    results = Hash.new
+    users_ach.map(&:schedule).flatten.each do |s|
+      results[s] = Hash.new 
+      activities_hash[s].keys.each { |a| results[s][a] = []}
+    end
+    results
+  end
+
+
+
+  # schedule_activities = Hash.new
+  # schedules.each { |s| schedule_activities[s] = s.tasks.map(&:activity).flatten}
+
+
+
+
+
+
+
+
+
+
+
+
+  def self.sis_reports(achievements, activities, follow_up_messages)
+    results = Hash.new
+    achievements = achievements.group_by(&:user)
+    achievements.keys.each do |user|
+      results[user] = Hash.new
+      user_level = user.level(achievements[user].first.date)
+      schedule_total_score = user_level.level.schedules.first.sum(:points)
+      results[user]["Total score"] = (Achievement.total_score(achievements[user]) / schedule_total_score) * 100
+      user.calculate_activity_score(achievements[user], results[user], activities)
+    end
+    results
+  end
+
+  def calculate_activity_score(achievements, user_hash, activities)
+    activities.each { |a| user_hash[a] = 0 }
+    # get achievements by day and get percentage for this day according to completed tasks schedule
+    temp_hash = Hash.new
+    achievements.group_by(&:date).values.each do |a|
+      schedules = a.completed_tasks.flatten.group_by(&:schedule)
+      grouped_tasks = schedules.group_by(&:activity)
+      grouped_tasks.keys.each do |ac|
+        grouped_tasks[ac].map(&:points).flatten.inject(0, :+)
+        temp_hash[ac] += []
+      end
+    end
+    achievements.map(&:completed_tasks).flatten.each do |t|
+      user_hash[t.activity] += t.points
+    end
+  end
+
+  def self.bro_follow_up_report(start_range, end_range)
+
   end
 
   def role?(role)

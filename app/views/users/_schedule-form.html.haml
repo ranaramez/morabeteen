@@ -1,9 +1,9 @@
-- option_selected_schedule = selected_schedule || {}
+- option_selected_schedule = selected_schedule || get_selected_schedule_for_date(date)
 - if completed_tasks.empty?
   - completed_tasks = []
 - else
   - completed_tasks = completed_tasks[date]
-= form_for @achievement || Achievement.new, url: user_update_achievement_path(current_user.id), method: :put, remote: true, format: :js, class: "achievement-form" do |f|
+= form_for @achievement || Achievement.new, url: user_update_achievement_path(current_user.id), method: :put, remote: true, format: :js, class: "achievement-form form-inline" do |f|
   .header.clearfix
     .day-score{id: "#{date.strftime('%y%m%d')}-day-score"}
       = render partial: 'users/day_score', locals: {date: date}
@@ -12,10 +12,14 @@
     
     = f.hidden_field :unchecked_task, class: "achievement-unchecked-task"
     
+    - first_schedule = get_selected(schedules, option_selected_schedule)
+
     - if schedules.count > 1
       = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks), {selected: option_selected_schedule}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule", class: "span2"}
+    - else
+      = f.hidden_field :schedule_id, value: first_schedule.id
+
   .content.clearfix
     .span12
-      - first_schedule = get_selected(schedules, selected_schedule)
       .schedule-form{id: "#{date.strftime('%y%m%d')}"}
         = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks}

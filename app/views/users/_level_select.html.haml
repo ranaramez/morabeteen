@@ -1,0 +1,9 @@
+.content.clearfix
+  %h4
+    - unless show_level_select?(start_date, end_date, schedules)
+      = form_for current_user, url: user_update_level_path(current_user.id), method: :put, remote: true do |f|
+        = t('level.selected_level_for_week')
+        = f.select :choosen_level, level_select(schedules.map(&:level).uniq), {}, {class: "span2", id: "level-select"}
+    - else
+      = t('level.selected_level_for_week')
+      = current_level.name

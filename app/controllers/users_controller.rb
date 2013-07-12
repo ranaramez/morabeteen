@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def update_achievement
     removed_task = Task.find(params[:achievement][:unchecked_task]) if params[:achievement][:unchecked_task]
     checked_task = Task.find(params[:achievement][:completed_task_ids]) if params[:achievement][:completed_task_ids]
-    if @achievement = current_user.achievements.find_by(date: params[:achievement][:date].to_date)
+    if @achievement = current_user.achievements.find_by(date: params[:achievement][:date].to_date, schedule_id: params[:achievement][:schedule_id])
       unless removed_task
         completed_tasks = [checked_task].flatten - @achievement.completed_tasks
         @achievement.completed_tasks.push(completed_tasks) unless completed_tasks.empty?
@@ -29,9 +29,11 @@ class UsersController < ApplicationController
     @date = params[:achievement][:date]
     @selected_schedule_id = params[:achievement][:schedule_id]
     @total_acc_score = current_user.total_points(@achievements)
+    @current_level = current_user.level(Date.today).try(:level)
     @current_week_score = current_user.total_points(@achievements, @schedules.first.start_date, @schedules.first.end_date)
 
-    @response = {schedules: @schedules, date: @date, schedule_id: @selected_schedule_id, completed_task_ids: @completed_tasks, acc_score: @total_acc_score, week_score: @current_week_score}
+    @response = {schedules: @schedules, date: @date, schedule_id: @selected_schedule_id, completed_task_ids: @completed_tasks, acc_score: @total_acc_score, week_score: @current_week_score,
+                  current_level: @current_level}
     respond_with @response, location: user_path(current_user)
   end
 

@@ -1,0 +1,16 @@
+.control-group
+  = f.label :activity, class: "label"
+  .controls
+    .row
+      .span4
+        = f.select :activity_id, options_for_select(Activity.all.map{|a| [a.title, a.id]}), class: "span2"
+%br
+- if f.object.new_record?
+  - f.object.tasks.build
+= f.fields_for :tasks do |t|
+  .row-fluid
+    .span5
+      = t.error_messages header_tag: 'h4', message: nil, class: 'alert alert-error'
+  = render partial: "task_fields", locals: {f: t}
+.add-task
+  = link_to_add_fields t("schedule.add_task"), f, :tasks
