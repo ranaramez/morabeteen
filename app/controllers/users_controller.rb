@@ -27,12 +27,12 @@ class UsersController < ApplicationController
     @achievements = current_user.achievements
     @completed_tasks = current_user.completed_tasks_by_day(@achievements)
     @date = params[:achievement][:date]
-    @selected_schedule_id = params[:achievement][:schedule_id]
+    @selected_schedule = @achievement.schedule
     @total_acc_score = current_user.total_points(@achievements)
-    @current_level = current_user.level(Date.today).try(:level)
+    @current_level = current_user.level(params[:achievement][:date]).try(:level)
     @current_week_score = current_user.total_points(@achievements, @schedules.first.start_date, @schedules.first.end_date)
 
-    @response = {schedules: @schedules, date: @date, schedule_id: @selected_schedule_id, completed_task_ids: @completed_tasks, acc_score: @total_acc_score, week_score: @current_week_score,
+    @response = {schedules: @schedules, date: @date, selected_schedule: @selected_schedule, completed_task_ids: @completed_tasks, acc_score: @total_acc_score, week_score: @current_week_score,
                   current_level: @current_level}
     respond_with @response, location: user_path(current_user)
   end

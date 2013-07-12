@@ -13,9 +13,9 @@
     = f.hidden_field :unchecked_task, class: "achievement-unchecked-task"
     
     - first_schedule = get_selected(schedules, option_selected_schedule)
-
+    
     - if schedules.count > 1
-      = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks), {selected: option_selected_schedule}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule", class: "span2"}
+      = f.select :schedule_id, schedules_select(schedules, f, date, completed_tasks), {selected: option_selected_schedule.try(:id)}, {id: "#{date.strftime('%y%m%d')}_achievement_schedule", class: "span2"}
     - else
       = f.hidden_field :schedule_id, value: first_schedule.id
 

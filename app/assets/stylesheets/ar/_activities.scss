@@ -11,6 +11,9 @@
     
     a{
       text-decoration: none;
+      &:hover{
+        color: #FAA196;
+      }
     }
   }
 }
