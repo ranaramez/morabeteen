@@ -1,10 +1,11 @@
 .control-group
-  .controls.controls-row   
+  .controls.controls-row
     = f.text_field :description, class: "span3", placeholder: t('common.task')
     = f.number_field :points, class: "span1", placeholder: t('common.points')
-    %label.checkbox.inline.span3
+    %label.checkbox.span
       = f.check_box :_destroy
-      = t('common.remove')
+      %span
+        = t('common.remove')
     - if sis_zone?
       .span2
         = t('task.duplicate')
