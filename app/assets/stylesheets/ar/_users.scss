@@ -48,7 +48,7 @@
 
     .action-info{
       color: #f0992b;
-      margin-top: 1%;
+      margin-top: 15%;
     }
   }
 
@@ -57,18 +57,38 @@
     .week-wrapper{
       padding: 8px 10px;
       background: #efefef;
+      margin-bottom: 10px;
     }
 
     .week-level{
-
+      form{
+        margin: 0;
+      }
     }
 
     .week-points{
+      margin-top: 1%;
       color: #f0992b;
     }
 
-    .days-wrapper{
+    .days-activity{
+      margin: 0;
       list-style: none;
+
+      li{
+        margin-bottom: 20px;
+        border: 1px dashed #f1f1f1;
+      }
+
+      .header{
+        padding: 8px;
+        background: #66b8ad;
+      }
+    }
+
+    .activity-header{
+      padding: 8px;
+      background: #f1f1f1;
     }
   }
 }

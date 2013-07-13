@@ -443,6 +443,11 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
   margin-top: 3px;
 }
 
+form label.checkbox div{
+  float: right;
+  margin-left: 8px;
+}
+
 legend{
   color: #666;
 }
@@ -513,4 +518,9 @@ legend{
 
 .modal-body .control-group{
   margin-bottom: 10px;
+}
+
+.chechbox div{
+  float: right;
+  margin-left: 8px;
 }

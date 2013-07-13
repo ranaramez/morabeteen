@@ -1,9 +1,5 @@
 - (start_range.downto(end_range)).each do |date|
-  %li.clearfix
-    .calendar
-      .date
-        = date.strftime('%a, %d %b')
-    
-  .form{id: "#{date.strftime('%y%m%d')}-form"}
-    .schedule-item
-      = render partial: 'users/schedule-form', locals: {date: date, schedules: schedules, selected_schedule: nil, completed_tasks: completed_tasks}
+  %li
+    .form{id: "#{date.strftime('%y%m%d')}-form"}
+      .schedule-item
+        = render partial: 'users/schedule-form', locals: {date: date, schedules: schedules, selected_schedule: nil, completed_tasks: completed_tasks}

@@ -5,8 +5,13 @@
   - completed_tasks = completed_tasks[date]
 = form_for @achievement || Achievement.new, url: user_update_achievement_path(current_user.id), method: :put, remote: true, format: :js, class: "achievement-form form-inline" do |f|
   .header.clearfix
-    .day-score{id: "#{date.strftime('%y%m%d')}-day-score"}
-      = render partial: 'users/day_score', locals: {date: date}
+    .pull-right
+      .day-score{id: "#{date.strftime('%y%m%d')}-day-score"}
+        = render partial: 'users/day_score', locals: {date: date}
+
+    .calendar.pull-left
+      .date
+        = date.strftime('%a, %d %b')
       
     = f.hidden_field :date, value: date
     
@@ -20,6 +25,5 @@
       = f.hidden_field :schedule_id, value: first_schedule.id
 
   .content.clearfix
-    .span12
-      .schedule-form{id: "#{date.strftime('%y%m%d')}"}
-        = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks}
+    .schedule-form{id: "#{date.strftime('%y%m%d')}"}
+      = render partial: 'users/schedule', locals: {schedule: first_schedule, f: f, date: date, completed_tasks: completed_tasks}
