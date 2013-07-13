@@ -1,9 +1,9 @@
-.container-fluid
+.container
   %h3
     Schedules
     %span.pull-right
       = link_to "New schedule", "#", class: "btn", data: {toggle: "modal", target: "#new-schedule"}
-  .row-fluid
+  .row
     - if @schedules.present?
       - grouped_schedules = @schedules.group_by(&:start_date)
       - grouped_schedules.keys.each do |s|

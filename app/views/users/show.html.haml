@@ -2,17 +2,19 @@
   .container
     .profile-header.row
       .user-avatar.pull-left
-        = image_tag 'default-avatar.png', class: 'img-polaroid'
+        = image_tag 'avatar.png', class: 'img-polaroid'
         / = image_tag @user.avatar.profile.url
-      .media-body
-        %h3.media-heading
-          = @user.name
+      .user-info
+        .span3
+          .user-name
+            / = @user.name
+            عمر بن الخطاب
         %ul.badges-list
           %li.badges.abubakr
           %li.badges.abuobayda
           %li.badges.omr
           %li.badges.ali
-        .span1.pull-left
+        .span1.action-info.pull-left
           .numbers{id: "#{@user.id}-acc-score"}
             = total_acc_score
           %label
