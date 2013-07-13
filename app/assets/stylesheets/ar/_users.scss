@@ -13,6 +13,7 @@
 }
 
 .profile-wrapper{
+
   .badges-list{
     margin: 10px 0;
     list-style: none;
@@ -22,18 +23,22 @@
       margin-left: 5px;
     }
   }
+  
+  .profile-header{
+    padding: 8px;
+    border: 1px dashed #a2a7af;
 
-  .user-avatar{
-    margin-left: 20px;
-
-    img{
-      width: 168px;
-      height: 168px;
+    .user-avatar{
+      img{
+        width: 95px;
+        height: 95px;
+        margin-left: 20px;
+      }
     }
   }
 
   .user-info{
-    padding: 77px 0;
+    padding-top: 38px;
 
     .user-name{
       font-size: 1.8em;
@@ -45,4 +50,23 @@
     }
   }
 
+  .timeline-wrapper{
+
+    .week-wrapper{
+      padding: 8px 10px;
+      background: #efefef;
+    }
+
+    .week-level{
+
+    }
+
+    .week-points{
+      color: #f0992b;
+    }
+
+    .days-wrapper{
+      list-style: none;
+    }
+  }
 }
