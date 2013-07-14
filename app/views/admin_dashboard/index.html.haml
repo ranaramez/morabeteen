@@ -1,23 +1,24 @@
-.container
-  .row
-    .span3.well
-      .title
-        = link_to "Activites", activities_path
-      .title
-        = link_to "Schedule", schedules_path
+/ .container
+/   .row
+/     .span3.well
+/       .title
+/         = link_to "Activites", activities_path
+/       .title
+/         = link_to "Schedule", schedules_path
 .container
   .main
     %ul#rb-grid.rb-grid.clearfix
       %li.icon-clima-1.rb-span-2
-        %h3 Lisbon
-        %span.rb-temp 21°C
+        %h3
+          = link_to "Schedule", schedules_path
+        / %span.rb-temp 21°C
         .rb-overlay
           %span.rb-close close
           .rb-week
             %div
               %span.rb-city Lisbon
               %span.icon-clima-1
-              %span 21°C
+              / %span 21°C
             %div
               %span Mon
               %span.icon-clima-1
@@ -47,13 +48,14 @@
               %span.icon-clima-1
               %span 18°C
       %li.icon-clima-2
-        %h3 Paris
-        %span.rb-temp 11°C
+        %h3
+          = link_to "Activites", activities_path
+        / %span.rb-temp 11°C
         .rb-overlay
           %span.rb-close close
           .rb-week
             %div
-              %span.rb-city Paris
+              %span.rb-city
               %span.icon-clima-2
               %span 11°C
             %div
@@ -426,3 +428,8 @@
               %span Sun
               %span.icon-clima-8
               %span 29°C
+
+= javascript_include_tag "boxgrid"
+= javascript_include_tag "jquery.fittext"
+:javascript
+  $(function(){Boxgrid.init()});

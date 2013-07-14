@@ -8,8 +8,7 @@
 //= require tasks
 //= require users
 //= require schedules
-//= require merto-boxgrid
-
+//= require modernizr.custom
 
 $(function(){
   $('select').selectpicker();
