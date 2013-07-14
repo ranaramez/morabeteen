@@ -21,6 +21,10 @@
 	width: 49%;
 }
 
+.rb-grid li.rb-span-3 {
+	width: 74%;
+}
+
 .rb-grid li.rb-span-4 {
 	width: 99%;
 }
