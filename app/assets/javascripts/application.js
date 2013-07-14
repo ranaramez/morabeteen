@@ -8,6 +8,7 @@
 //= require tasks
 //= require users
 //= require schedules
+//= require merto-boxgrid
 
 
 $(function(){
