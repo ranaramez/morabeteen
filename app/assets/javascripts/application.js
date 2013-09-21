@@ -12,9 +12,9 @@
 $(function(){
   $('select').selectpicker();
 
-  $('input').iCheck({
-    checkboxClass: 'icheckbox_minimal-grey',
-    radioClass: 'iradio_minimal-grey'
-  });
+  // $('input').iCheck({
+  //   checkboxClass: 'icheckbox_minimal-grey',
+  //   radioClass: 'iradio_minimal-grey'
+  // });
 
 });
