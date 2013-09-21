@@ -1,9 +1,9 @@
 = form_for('user', url: user_session_path, html: {class: 'navbar-form pull-right'}) do |f|
-  = f.email_field :email, autofocus: true, placeholder: 'البريد الإلكتروني', class: 'input-medium'
+  = f.text_field :username, autofocus: true, placeholder: 'البريد الإلكتروني', class: 'input-medium'
   = f.password_field :password, placeholder: 'كلمة المرور', class: 'input-medium'
   = f.submit "الدخول", class: "btn btn-primary"
 
-  .social-signin
-    أو سجل الدخول عن طريق
-    = link_to "/auth/facebook", class: "facebook" do
-      الفيسبوك
+  / .social-signin
+  /   أو سجل الدخول عن طريق
+  /   = link_to "/auth/facebook", class: "facebook" do
+  /     الفيسبوك

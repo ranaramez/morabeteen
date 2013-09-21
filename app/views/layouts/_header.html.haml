@@ -3,17 +3,14 @@
     %div{class: current_page?(root_path) ? "container-fluid" : "container"}
       %div{class: current_page?(root_path) ? "row-fluid" : "row"}
         .span4
-          .clearfix
-            = link_to 'المرابطين',root_path, class: 'brand'
-          - unless user_signed_in?
-            .slogan
-              نصلح أنفسنا ونجتهد في إصلاح غيرنا :)
+          .slogan.brand
+            نصلح أنفسنا ونجتهد في إصلاح غيرنا :)
         .span8
           - if user_signed_in?
             %ul.nav.pull-right
               %li.dropdown{id: 'user-management'}
                 %a#user-management-header.dropdown-toggle{href: '#', role: 'button', data: {toggle: 'dropdown'}}
-                  = current_user.email
+                  = current_user.username
                   %b.caret
                 %ul.dropdown-menu{role: 'menu', :"aria-labelledby" => "user-management"}
                   %li

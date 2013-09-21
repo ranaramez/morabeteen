@@ -6,8 +6,8 @@ class User
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :registerable,
+        :rememberable, :trackable
 
   # Constants
   GENDERS = [:male, :female]
@@ -19,8 +19,9 @@ class User
   ROLES = [:admin, :default]
 
   ## Database authenticatable
-  field :email,              :type => String, :default => ""
   field :encrypted_password, :type => String, :default => ""
+  field :username,            type: String
+  # field :email
   
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -37,23 +38,23 @@ class User
   field :last_sign_in_ip,    :type => String
 
   ## Confirmable
-  field :confirmation_token,   :type => String
-  field :confirmed_at,         :type => Time
-  field :confirmation_sent_at, :type => Time
-  field :unconfirmed_email,    :type => String # Only if using reconfirmable
+  # field :confirmation_token,   :type => String
+  # field :confirmed_at,         :type => Time
+  # field :confirmation_sent_at, :type => Time
+  # field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
   # Fields
-  field :first_name
-  field :last_name
-  field :facebook_uid
+  # field :first_name
+  # field :last_name
+  # field :facebook_uid
   field :gender,             type: Symbol
-  field :code_name,          type: String
+  # field :code_name,          type: String
   field :role,               type: Symbol
 
   attr_accessor :choosen_level
 
   #Extensions
-  slug :code_name
+  slug :username
   # mount_uploader :avatar, AvatarUploader
   
   # Relations
@@ -62,11 +63,18 @@ class User
   
   # Validations
   validates_presence_of :gender
+  validates_presence_of   :password, :on=>:create
+  validates_confirmation_of   :password, :on=>:create
+  validates_length_of :password, :within => Devise.password_length, :allow_blank => true
+  # check on format no whitespaces
+  validates :username, :uniqueness => { :case_sensitive => false}
 
   # Callbacks
-  before_create :generate_code
-  before_create :skip_confirmation_mail, if: ->{self.facebook_uid.present?}
-  
+  # before_create :generate_code
+  # before_create :skip_confirmation_mail, if: ->{self.facebook_uid.present?}
+  # before_create :skip_confirmation_mail
+
+
   scope :females, where(gender: :female)
   scope :males, where(gender: :male)
   # Methods
@@ -74,16 +82,28 @@ class User
     "#{first_name} #{last_name}"
   end
 
-  def self.from_omniauth(auth)
-    find_by(facebook_uid: auth["uid"]) || create_with_omniauth(auth)
-  end
+  # def email_required?
+  #   false
+  # end
 
-  def self.create_with_omniauth(auth)
-    user = find_by(email: auth["info"]["email"])
-    params = {facebook_uid: auth["uid"], first_name: auth["info"]["first_name"], last_name: auth["info"]["last_name"]}
-    return user.update_attributes(params) if user.present?
-    return User.create(params.merge!({email: auth["info"]["email"], password: Devise.friendly_token[0,20], gender: auth["extra"]["raw_info"]["gender"]}))
-  end
+  # def self.find_first_by_auth_conditions(warden_conditions)
+  #   conditions = warden_conditions.dup
+  #   if username = conditions.delete(:username)
+  #     self.where(username: /^#{Regexp.escape(login)}$/i).first
+  #   else
+  #     super
+  #   end
+  # end
+  # def self.from_omniauth(auth)
+  #   find_by(facebook_uid: auth["uid"]) || create_with_omniauth(auth)
+  # end
+
+  # def self.create_with_omniauth(auth)
+  #   user = find_by(email: auth["info"]["email"])
+  #   params = {facebook_uid: auth["uid"], first_name: auth["info"]["first_name"], last_name: auth["info"]["last_name"]}
+  #   return user.update_attributes(params) if user.present?
+  #   return User.create(params.merge!({email: auth["info"]["email"], password: Devise.friendly_token[0,20], gender: auth["extra"]["raw_info"]["gender"]}))
+  # end
 
 
   ################# REDO THE FOLLOWING METHODS ACCORDING TO THE NEW STRUCTURE
@@ -256,10 +276,10 @@ class User
 
   protected
 
-  def generate_code
-    gender_count = User.where(gender: self.gender).count + 1
-    self.code_name = GENDER_PREFIX_CODE[self.gender.downcase] + gender_count.to_s
-  end
+  # def generate_code
+  #   gender_count = User.where(gender: self.gender).count + 1
+  #   self.code_name = GENDER_PREFIX_CODE[self.gender.downcase] + gender_count.to_s
+  # end
 
   def skip_confirmation_mail
     self.skip_confirmation!

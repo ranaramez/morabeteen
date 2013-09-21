@@ -5,7 +5,7 @@
     .span12
       - act.tasks.each do |task|
         .span3
-          %label.checkbox
+          %label
             = check_box_tag 'achievement[completed_task_ids][]', task.id, check_completed(task, date, completed_tasks), class: "checkable-task"
             %span
               = task.description

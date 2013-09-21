@@ -9,26 +9,6 @@
             %p
               [رواه النسائي]
 
-  .stat-progress
-    .container
-      .row
-        .span12
-          .current-date
-            ٢٤ رمضان - ١٤٣٤ هجرياً
-
-          .progress-popover
-            - flag = 940*60/100-31;
-            %i.icon-flag-checkered{style: "right: #{flag}px"}
-
-          .progress.progress-striped.active
-            .bar{style: "width: 60%;"}
-          .month-stat
-            .month-block
-              شعبان
-            .month-block
-              رمضان
-            .month-block
-              شوال
 
   .container
     .row
@@ -38,31 +18,31 @@
             التسجيل
           %br
 
-          %form
+          = form_for("user", url: user_registration_path) do |f|
             .control-group
               .controls
-                %input{type: 'text', class: 'input-xlarge', placeholder: 'البريد الإلكتروني'}
+                = f.text_field :username, class: 'input-xlarge', placeholder: 'اسم المستخدم'
 
             .control-group
               .controls
-                %input{type: 'password', class: 'input-xlarge', placeholder: 'كلمة المرور'}
+                = f.password_field :password, class: 'input-xlarge', placeholder: 'كلمة المرور'
 
             .control-group
               .controls
-                %input{type: 'password', class: 'input-xlarge', placeholder: 'تأكيد كلمة المرور'}
+                = f.password_field :password_confirmation, class: 'input-xlarge', placeholder: 'تأكيد كلمة المرور'
 
             .control-group
               .controls
                 .radio-btn
-                  %input{type: 'radio'}
+                  = f.radio_button :gender, :male
                   ذكر
                 .radio-btn
-                  %input{type: 'radio'}
+                  = f.radio_button :gender, :female
                   أنثي
 
             .control-group
               .controls
-                %input{type: 'submit', value: 'تسجيل', class: 'btn btn-success'}
+                = f.submit "تسجيل", class: 'btn btn-success'
 
       .span7
         .video
