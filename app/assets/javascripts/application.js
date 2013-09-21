@@ -3,7 +3,6 @@
 //= require bootstrap
 //= require bootstrap-select
 //= require bootstrap-datepicker
-//= require 'jquery.icheck'
 //= require toastr
 //= require tasks
 //= require users

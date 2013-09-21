@@ -10,7 +10,7 @@ $ ->
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
 
-  $(document).on 'change', ".checkable-task", (event) ->
+  $(document).on 'click', ".checkable-task", (event) ->
     unless $(this).is(":checked")
       $(this).parents('form:first').find('.achievement-unchecked-task').val($(this).val())
     $(this).parents("form:first").submit()
