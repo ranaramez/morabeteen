@@ -2,10 +2,10 @@
   .navbar-inner
     %div{class: current_page?(root_path) ? "container-fluid" : "container"}
       %div{class: current_page?(root_path) ? "row-fluid" : "row"}
-        .span4
+        .span5
           .slogan.brand
             نصلح أنفسنا ونجتهد في إصلاح غيرنا :)
-        .span8
+        .span7
           - if user_signed_in?
             %ul.nav.pull-right
               %li.dropdown{id: 'user-management'}
