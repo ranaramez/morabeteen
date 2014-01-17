@@ -3,6 +3,7 @@ body {
   font-size: 13px;
   color: #555555;
   background-color: #ffffff;
+  min-height: 100%;
 }
 
 [class^="icon-"], [class*=" icon-"]{
@@ -23,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: #555555;
+  color: #6b7279;
   -webkit-font-smoothing: antialiased;
 }
 
