@@ -339,7 +339,7 @@ textarea {
 }
 
 .navbar .brand {
-  padding: 8px 20px 12px;
+  padding: 0;
   font-size: 20px;
   color: #FFFFFF;
   text-shadow: none;

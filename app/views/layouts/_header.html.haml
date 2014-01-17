@@ -1,17 +1,20 @@
-.navbar
+.navbar.navbar-fixed-top.header-wrapper
   .navbar-inner
     %div{class: current_page?(root_path) ? "container-fluid" : "container"}
       %div{class: current_page?(root_path) ? "row-fluid" : "row"}
         .span5
-          .slogan.brand
-            نصلح أنفسنا ونجتهد في إصلاح غيرنا :)
+          .brand
+            = image_tag("morabteen-logo.png")
+            %span.slogan
+              نصلح أنفسنا ونجتهد في إصلاح غيرنا :)
         .span7
           - if user_signed_in?
             %ul.nav.pull-right
               %li.dropdown{id: 'user-management'}
                 %a#user-management-header.dropdown-toggle{href: '#', role: 'button', data: {toggle: 'dropdown'}}
+                  / %b.caret
                   = current_user.username
-                  %b.caret
+                  = image_tag 'user-default-avatar.png', class: 'avatar'
                 %ul.dropdown-menu{role: 'menu', :"aria-labelledby" => "user-management"}
                   %li
                     = link_to t('common.my_schedule'), user_path(current_user.id)

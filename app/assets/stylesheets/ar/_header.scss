@@ -1,0 +1,28 @@
+.header-wrapper{
+  .slogan{
+    color: #fff;
+    font:{
+      size: 12px;
+      weight: 600;
+    }
+  }
+
+  .avatar{
+    margin-right: 4px;
+  }
+
+  #user-management-header{
+    text-transform: capitalize;
+    padding-left: 0;
+  }
+
+}
+
+.navbar .pull-right > li > .dropdown-menu{
+  &:before{
+    left: 7px;
+  }
+  &:after{
+    left: 8px;
+  }
+}
