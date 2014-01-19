@@ -3,7 +3,7 @@
   .schedule-track{
     background: #f5f5f5;
     min-height: 100%;
-    position: absolute;
+    position: fixed;
     width: 60px;
   }
 
@@ -35,41 +35,52 @@
       }
     }
 
-    .single-day{
+    .block{
       padding-top: 10px;
       border-top: 1px solid #f5f5f5;
 
-      &:after{
-        position: relative;
-        top: -20px;
-        right: -28px;
+      &:before{
+        position: absolute;
+        right: 208px;
         display: inline-block;
         border-top: 9px solid transparent;
         border-left: 9px solid #ffffff;
         border-bottom: 9px solid transparent;
         content: '';
       }
+
+      &.sorting{
+        border-top: 0;
+        padding-top: 0;
+      }
     }
 
     .track-icon{
       position: absolute;
       height: 0;
-      i.icon-calendar{
+      i{
         position: relative;
         color: #f8981c;
         font-size: 1.6em;
         right: -60px;
-        top: -20px;
+        top: 0;
         line-height: 16px;
         &:before{
           background: #f5f5f5;
         }
       }
+
+      i.icon-cog{
+        right: -59px;
+      }
     }
 
     .current-date{
-      color: #6b7279;
+      // color: #6b7279;
+      // color: #f8981c;
+      color: #32ac97;
       font-weight: 600;
+      margin-bottom: 10px;
     }
   }
 }
